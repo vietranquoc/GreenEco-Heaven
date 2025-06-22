@@ -72,3 +72,68 @@ exports.updateOrderStatus = async (req, res) => {
     res.status(500).json({ message: 'Lỗi server' });
   }
 };
+
+exports.getInventory = async (req, res) => {
+  try {
+    const products = await Product.find({}, 'name stock');
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Lỗi server' });
+  }
+};
+
+// Thống kê sản phẩm bán theo tháng
+exports.getStatsByMonth = async (req, res) => {
+  try {
+    // Lấy tất cả order detail, join với product và order
+    const OrderDetail = require('../models/orderDetail.model');
+    const Product = require('../models/product.model');
+    const Order = require('../models/order.model');
+
+    // Lấy order detail, join order để lấy tháng, join product để lấy tên
+    const stats = await OrderDetail.aggregate([
+      {
+        $lookup: {
+          from: 'orders',
+          localField: 'orderId',
+          foreignField: '_id',
+          as: 'order',
+        },
+      },
+      { $unwind: '$order' },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'productId',
+          foreignField: '_id',
+          as: 'product',
+        },
+      },
+      { $unwind: '$product' },
+      {
+        $addFields: {
+          month: { $dateToString: { format: '%Y-%m', date: '$order.createdAt' } },
+          productName: '$product.name',
+        },
+      },
+      {
+        $group: {
+          _id: { month: '$month', productName: '$productName' },
+          totalSold: { $sum: '$quantity' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          month: '$_id.month',
+          productName: '$_id.productName',
+          totalSold: 1,
+        },
+      },
+      { $sort: { month: 1, productName: 1 } },
+    ]);
+    res.json(stats);
+  } catch (error) {
+    res.status(500).json({ message: 'Lỗi server' });
+  }
+};

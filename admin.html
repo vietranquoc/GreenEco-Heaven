@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/avatar.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./output.css">
+    <title>Quản lý - GreenEco Heaven</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-green-50 text-green-900">
+    <nav id="navbar" class="bg-green-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="font-Lobster sm:text-2xl text-yellow-500">
+                <a href="index.html">GreenEco Heaven</a>
+            </div>
+            <div id="nav-menu" class="hidden md:flex space-x-4">
+                <!-- Menu sẽ được thêm động từ main.js -->
+            </div>
+            <button id="hamburger" class="md:hidden text-2xl">☰</button>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-4">Quản lý</h1>
+        <h2 class="text-xl font-bold mb-2">Thống kê sản phẩm bán theo tháng</h2>
+        <div class="bg-white p-4 rounded-lg mb-4">
+            <canvas id="salesChart" height="100"></canvas>
+        </div>
+        <h2 class="text-xl font-bold mb-2">Danh sách đơn hàng</h2>
+        <div id="orders-admin" class="bg-white p-4 rounded-lg mb-4"></div>
+        <h2 class="text-xl font-bold mb-2">Sản phẩm tồn kho</h2>
+        <div id="inventory" class="bg-white p-4 rounded-lg"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Vui lòng đăng nhập!');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Kiểm tra vai trò admin
+            const roleResponse = await axios.get(`${API_URL}/auth/check-role`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (roleResponse.data.role !== 'admin') {
+                alert('Bạn không có quyền truy cập trang này!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Lấy thống kê sản phẩm bán theo tháng
+            await fetchAndRenderStatsByMonth();
+            // Lấy danh sách đơn hàng
+            await fetchAdminOrders();
+            // Lấy tồn kho
+            await fetchInventory();
+        });
+
+        async function fetchAndRenderStatsByMonth() {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await axios.get(`${API_URL}/orders/admin/stats-by-month`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                renderSalesChart(response.data);
+            } catch (error) {
+                console.error('Lỗi khi lấy thống kê:', error.message);
+                document.getElementById('salesChart').parentElement.innerHTML = '<p>Không thể tải thống kê.</p>';
+            }
+        }
+
+        function renderSalesChart(data) {
+            // Gom nhóm theo tháng, mỗi sản phẩm là 1 series
+            const months = [...new Set(data.map(item => item.month))];
+            const products = [...new Set(data.map(item => item.productName))];
+            const datasets = products.map(product => {
+                return {
+                    label: product,
+                    data: months.map(month => {
+                        const found = data.find(d => d.month === month && d.productName === product);
+                        return found ? found.totalSold : 0;
+                    }),
+                    backgroundColor: `rgba(${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},0.6)`
+                };
+            });
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            if(window.salesChartInstance) window.salesChartInstance.destroy();
+            window.salesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Sản phẩm bán theo tháng' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Số lượng bán' } },
+                        x: { title: { display: true, text: 'Tháng' } }
+                    }
+                }
+            });
+        }
+
+        async function fetchAdminOrders() {
+            const token = localStorage.getItem('token');
+            const ordersAdmin = document.getElementById('orders-admin');
+            try {
+                const response = await axios.get(`${API_URL}/orders`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                ordersAdmin.innerHTML = response.data.map(order => `
+                    <div class="border-b py-4">
+                        <p><strong>Mã đơn:</strong> ${order._id}</p>
+                        <p><strong>Người đặt:</strong> ${order.userId.name}</p>
+                        <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
+                        <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
+                        <p><strong>Trạng thái:</strong> ${order.status}</p>
+                        <div class="mt-2">
+                            <strong>Sản phẩm:</strong>
+                            ${order.items.map(item => `
+                                <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
+                            `).join('')}
+                        </div>
+                        ${order.status === 'pending' || order.status === 'Chờ xác nhận' ? `
+                        <button onclick="showConfirmOrderPopup('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Xác nhận</button>
+                        ` : ''}
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Lỗi khi lấy danh sách đơn hàng:', error.message);
+                ordersAdmin.innerHTML = '<p>Không thể tải danh sách đơn hàng.</p>';
+            }
+        }
+
+        // Popup xác nhận đơn hàng
+        function showConfirmOrderPopup(orderId) {
+            if(document.getElementById('confirmOrderModal')) document.getElementById('confirmOrderModal').remove();
+            const modal = document.createElement('div');
+            modal.id = 'confirmOrderModal';
+            modal.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50';
+            modal.innerHTML = `
+                <div class="bg-white p-6 rounded shadow-lg text-center">
+                    <p class="mb-4">Bạn có chắc muốn xác nhận đơn hàng này?</p>
+                    <button id="confirmOrderBtn" class="px-4 py-2 bg-green-600 text-white rounded mr-2">Xác nhận</button>
+                    <button onclick="document.getElementById('confirmOrderModal').remove()" class="px-4 py-2 bg-gray-300 rounded">Hủy</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            document.getElementById('confirmOrderBtn').onclick = async () => {
+                await updateOrderStatus(orderId, 'Đã xác nhận');
+                modal.remove();
+            };
+        }
+
+        async function fetchInventory() {
+            const token = localStorage.getItem('token');
+            const inventory = document.getElementById('inventory');
+            try {
+                const response = await axios.get(`${API_URL}/orders/admin/inventory`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                inventory.innerHTML = response.data.map(item => `
+                    <div class="border-b py-2">
+                        <p><strong>Tên:</strong> ${item.name}</p>
+                        <p><strong>Số lượng tồn:</strong> ${item.stock}</p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Lỗi khi lấy tồn kho:', error.message);
+                inventory.innerHTML = '<p>Không thể tải tồn kho.</p>';
+            }
+        }
+
+        async function updateOrderStatus(orderId, status) {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+            try {
+                await axios.put(`${API_URL}/orders/${orderId}`, { status }, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('Cập nhật trạng thái thành công!');
+                fetchAdminOrders(); // Cập nhật lại danh sách
+            } catch (error) {
+                console.error('Lỗi khi cập nhật trạng thái:', error.message);
+                alert('Có lỗi xảy ra!');
+            }
+        }
+    </script>
+</body>
+</html>

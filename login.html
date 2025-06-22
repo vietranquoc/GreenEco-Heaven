@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - GreenEco Heaven</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background-color: #e8f5e9;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center text-green-800 mb-6">Đăng Nhập</h2>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Nhập email của bạn">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+                <input type="password" id="password" name="password" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Nhập mật khẩu">
+            </div>
+            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition duration-200">
+                Đăng Nhập
+            </button>
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-600">
+            Chưa có tài khoản? <a href="register.html" class="text-green-600 hover:underline">Đăng ký ngay</a>
+        </p>
+        <p id="login-message" class="mt-4 text-center text-red-500"></p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('login-message');
+
+            try {
+                const response = await axios.post('http://localhost:5000/api/auth/login', {
+                    email,
+                    password
+                });
+                const { token } = response.data;
+                localStorage.setItem('token', token);
+                alert('Đăng nhập thành công!');
+                window.location.href = 'index.html'; // Chuyển về trang chính
+            } catch (error) {
+                console.error('Lỗi đăng nhập:', error.response ? error.response.data : error.message);
+                message.textContent = 'Email hoặc mật khẩu không đúng. Vui lòng thử lại!';
+            }
+        });
+    </script>
+</body>
+</html>
