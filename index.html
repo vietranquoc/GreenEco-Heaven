@@ -1,0 +1,857 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--~~~~~~~~~~~~~~~ Favicon ~~~~~~~~~~~~~~~-->
+    <link rel="shortcut icon" href="assets/img/avatar.ico " type="image/x-icon">
+    <!--~~~~~~~~~~~~~~~ Remix Icon ~~~~~~~~~~~~~~~-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+    <!--~~~~~~~~~~~~~~~ Swiper's CSS ~~~~~~~~~~~~~~~-->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link rel="stylesheet" href="./output.css">
+    <title>GreenEco Heaven</title>
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+    <header id="navbar" class="bg-green-950 fixed w-full top-0 left-0 z-50">
+        <nav class="container flex items-center justify-between h-16 sm:h-20">
+            <div class="font-Lobster sm:text-2xl">GreenEco Heaven</div>
+            
+            <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full
+            bg-green-950/80 backdrop-blur-sm flex items-center justify-center
+            duration-300 overflow-hidden lg:static lg:min-h-fit
+            lg:bg-transparent lg:w-auto">
+                <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                    <li>
+                        <a href="#home" class="nav-link active">Trang chủ</a>
+                    </li>
+                    
+                    <li>
+                        <a href="#about" class="nav-link">Về chúng tôi</a>
+                    </li>
+                    
+                    <li>
+                        <a href="#popular" class="nav-link">Sản phẩm</a>
+                    </li>
+
+                    <li>
+                        <a href="#review" class="nav-link">Đánh giá</a>
+                    </li>
+                    <li>
+                        <a href="#" id="cart-btn" class="relative ml-4">
+                            <i class="ri-shopping-bag-fill text-2xl text-yellow-500" ></i>
+                            <span id="cart-count" class="absolute top-1 right-1 bg-red-500 
+                            text-white text-xs rounded-full px-1">0</span>
+                        </a>
+                    </li>
+                </ul>
+                
+
+                <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+                    <img src="assets/img/leaf-1.png" alt="Leaf_image" class="w-32">
+                </div>
+
+                <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden ">
+                    <img src="assets/img/leaf-2.png" alt="Leaf_image" class="w-32">
+                </div>
+            </div>
+
+            <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+                <i class="ri-menu-4-line" id="hamburger"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!--~~~~~~~~~~~~~~~ Home ~~~~~~~~~~~~~~~-->
+        <section id="home" class="relative">
+            <div class="container">
+                <!-- blob 1 -->
+                <div class="w-64 h-64 bg-green-700 rounded-full blur-3xl -z-10
+                opacity-40 absolute top-1/2 left-1/2 transform 
+                -translate-x-1/2 -translate-y-1/2">
+                </div>
+
+                <!-- blob 2 -->
+                <div class="w-64 h-64 bg-green-700 rounded-full blur-3xl -z-10
+                opacity-40 absolute right-0 bottom-0">
+                </div>
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home_data w-full space-y-5 lg:w-1/2">
+                        <h1>
+                            <span class="text-yellow-500">Thực phẩm sạch</span> mang lại tác động tích cực <br>
+                            <span class="text-yellow-500">cho môi trường</span> và sức khỏe của bạn
+                        </h1>
+
+                        <p class="text-slate-300 font-Lobster">
+                            GreenEco Heaven cung cấp rau, củ, quả hữu cơ tươi ngon, 
+                            an toàn cho mọi gia đình Việt. 
+                            Chúng tôi cam kết sản phẩm không hóa chất độc hại, 
+                            bảo vệ sức khỏe và môi trường sống.
+                        </p>
+                        
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                            <a href="products.html" class="btn flex items-center justify-center">
+                                <span>Mua ngay</span>
+                                <i class="ri-leaf-line"></i>
+                            </a>
+                            <a href="#about" class="btn btn_outline flex items-center justify-center">
+                                <span>Tìm hiểu thêm</span>
+                                <i class="ri-leaf-line"></i>
+                            </a>
+                        </div>
+
+                        <!-- <p class="text-xs font-Lobster text-slate-300">
+                            You will get 30-days free trial.
+                        </p> -->
+
+                        <div class="flex items-center gap-5 text-lg lg:pt-10">
+                            <a href="https://www.facebook.com/profile.php?id=61576912419504" target="_blank" rel="noopener">
+                                <i class="ri-facebook-fill hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                            </a>
+                            <i class="ri-twitter-x-line text-slate-300 
+                            hover:text-yellow-500 duration-300 cursor-pointer
+                            text-base"></i>
+                            <i class="ri-instagram-line text-slate-300 
+                            hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                            <i class="ri-linkedin-fill text-slate-300 
+                            hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                    <div class="w-full relative lg:w-1/2">
+                        <img src="assets/img/home2-removebg.png" alt="home_image"
+                        class="home_image">
+
+                        <!-- leaf -->
+                        <div class="absolute -top-10 right-0 opacity-30 xl:top-5
+                        animate-movingY">
+                            <i class="ri-leaf-line text-6xl text-yellow-500"></i>
+                        </div>
+
+                        <!-- flower -->
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-flower-line text-6xl text-yellow-500"></i>
+                        </div>
+                        
+                        <!-- plant -->
+                        <div class="hidden absolute -top-8 -left-5 opacity-30
+                        lg:block animate-scalingUp">
+                            <i class="ri-plant-line text-6xl text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--~~~~~~~~~~~~~~~ Services ~~~~~~~~~~~~~~~-->
+        <div class="bg-white text-green-900 py-20">
+            <div class="container w-full grid grid-cols-1 gap-8 md:grid-cols-2 
+            lg:grid-cols-3 xl:grid-cols-4">
+                <!-- card 1 -->
+                <div class="service_card border border-green-900 p-5 cursor-pointer
+                rounded-md hover:shadow-2xl hover:-translate-y-1 duration-300 
+                space-y-5"> 
+                    <div class="flex items-center gap-5">
+                        <i class="ri-truck-line text-3xl md:text-4xl
+                        xl:text-5xl"></i>
+                        <p class="md:text-lg font-bold">
+                            Giao hàng <br>
+                            hanh chóng
+                        </p>
+                    </div>
+                    <p class="font-Lobster">
+                        Chúng tôi cam kết giao hàng tận nơi nhanh chóng, 
+                        đảm bảo sản phẩm luôn tươi mới khi đến tay khách hàng.
+                    </p>
+                </div>
+
+                <!-- card 2 -->
+                <div class="service_card border border-green-900 p-5 cursor-pointer
+                rounded-md hover:shadow-2xl hover:-translate-y-1 duration-300 
+                space-y-5"> 
+                    <div class="flex items-center gap-5">
+                        <i class="ri-customer-service-line text-3xl md:text-4xl
+                        xl:text-5xl"></i>
+                        <p class="md:text-lg font-bold">
+                            Hỗ trợ <br>
+                            khách hàng tận tâm
+                        </p>
+                    </div>
+                    <p class="font-Lobster">
+                        Đội ngũ chăm sóc khách hàng luôn sẵn sàng tư vấn 
+                        và giải đáp mọi thắc mắc của bạn.
+                    </p>
+                </div>
+
+                <!-- card 3 -->
+                <div class="service_card border border-green-900 p-5 cursor-pointer
+                rounded-md hover:shadow-2xl hover:-translate-y-1 duration-300
+                space-y-5"> 
+                    <div class="flex items-center gap-5">
+                        <i class="ri-plant-line text-3xl md:text-4xl
+                        xl:text-5xl"></i>
+                        <p class="md:text-lg font-bold">
+                            Sản phẩm <br>
+                            hữu cơ chính gốc
+                        </p>
+                    </div>
+                    <p class="font-Lobster">
+                        Chỉ cung cấp các loại rau, củ, quả hữu cơ chất lượng cao, 
+                        an toàn cho sức khỏe.
+                    </p>
+                </div>
+
+                <!-- card 4 -->
+                <div class="service_card border border-green-900 p-5 cursor-pointer
+                rounded-md hover:shadow-2xl hover:-translate-y-1 duration-300
+                space-y-5"> 
+                    <div class="flex items-center gap-5">
+                        <i class="ri-money-dollar-circle-line text-3xl md:text-4xl
+                        xl:text-5xl"></i>
+                        <p class="md:text-lg font-bold">
+                            Giá cả <br>
+                            hợp lý
+                        </p>
+                    </div>
+                    <p class="font-Lobster">
+                        Giá thành cạnh tranh, phù hợp với mọi gia đình Việt Nam.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--~~~~~~~~~~~~~~~ About us ~~~~~~~~~~~~~~~-->
+        <section id="about" class="relative overflow-hidden">
+            <div class="about_leaf absolute -top-8 -right-12 opacity-50">
+                <img src="assets/img/leaf-3.png" alt="leaf_image" class="w-40 md:w-52 xl:w-64">
+            </div>
+            
+            <div class="about_top flex flex-col items-center gap-3 text-center mb-10
+            md:mb-20">
+                <h2 class="title">Về chúng tôi</h2>
+                <p class="max-w-2xl">Follow instruction for more</p>
+            </div>
+
+            <div class="container space-y-10 xl:space-y-0">
+                <!-- item 1 -->
+                <div class="flex flex-col items-center lg:flex-row gap-5">
+                    <!-- image -->
+                    <div class="about_item_1_img w-full lg:w-1/2">
+                        <img src="assets/img/about3.png" alt="About_image" 
+                        class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+                    </div>
+
+                    <!-- content -->
+                    <div class="about_item_1_content w-full lg:w-1/2">
+                        <div class="space-y-5">
+                            <h3>
+                                Cùng bạn <span class="text-yellow-500">xây dựng</span> <br>
+                                khu vườn hữu cơ
+                            </h3>
+                            <p class="text-slate-300 font-Lobster">
+                                GreenEco Heaven chuyên cung cấp các loại 
+                                rau, củ, quả hữu cơ tươi ngon, an toàn cho sức khỏe. 
+                                Sản phẩm của chúng tôi được trồng và chăm sóc theo quy trình tự nhiên, 
+                                không sử dụng hóa chất độc hại, đảm bảo giữ trọn hương vị 
+                                và giá trị dinh dưỡng.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- item 2 -->
+                <div class="flex flex-col items-center lg:flex-row-reverse gap-5">
+                    <!-- image -->
+                    <div class="about_item_2_img w-full lg:w-1/2">
+                        <img src="assets/img/about4.png" alt="About_image" 
+                        class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+                    </div>
+
+                    <!-- content -->
+                    <div class="about_item_2_content w-full lg:w-1/2">
+                        <div class="space-y-5">
+                            <h3>
+                                Đồng hành cùng bạn <br>
+                                <span class="text-yellow-500">nuôi dưỡng</span> sức khỏe xanh
+                            </h3>
+                            <p class="text-slate-300 font-Lobster">
+                                Chúng tôi cam kết mang đến thực phẩm sạch, nguồn gốc rõ ràng, 
+                                giúp bạn và gia đình yên tâm sử dụng mỗi ngày. 
+                                Hãy lựa chọn GreenEco Heaven để cùng lan tỏa lối sống lành mạnh 
+                                và bảo vệ môi trường!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--~~~~~~~~~~~~~~~ Popular ~~~~~~~~~~~~~~~-->
+        <section id="popular" class="bg-green-900">
+            <div class="popular_top flex flex-col items-center gap-3 text-center mb-40
+            md:mb-28">
+                <h2 class="title">Sản phẩm nổi bật</h2>
+                <p class="max-w-2xl">Follow instruction for more</p>
+            </div>
+
+            <div class="container w-full grid grid-cols-1 gap-x-8 gap-y-36 md:grid-cols-2
+            lg:grid-cols-3 xl:grid-cols-4">
+                <!-- card 1 -->
+                 <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative">
+                    <img src="assets/img/bapcai-removebg-preview.png" alt="popular_image"
+                    class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2
+                    -translate-y-1/2 duration-500">
+                    <p class="italic">
+                        Bắp cải được trồng theo phương pháp hữu cơ, 
+                        không sử dụng thuốc trừ sâu hay phân bón hóa học. 
+                        Lá giòn, tươi xanh, thích hợp cho các món xào, luộc hoặc muối chua. 
+                        Đảm bảo an toàn cho sức khỏe người dùng.
+                    </p>
+                    <h3>Bắp cải hữu cơ</h3>
+                    
+                    <div class="text-yellow-500 text-xs py-3">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                        <i class="ri-star-line text-gray-400"></i>
+                    </div>
+
+                    <!-- <div class="flex items-center justify-between">
+                        <p class="text-xl">75,000₫</p>
+
+                        <button class="bg-yellow-500 px-2 py-1 rounded-sm text-xl">
+                            <i class="ri-shopping-cart-fill"></i>
+                        </button>
+                    </div> -->
+                 </div>
+
+                 <!-- card 2 -->
+                 <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative">
+                    <img src="assets/img/camSanh-removebg-preview.png" alt="popular_image"
+                    class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2
+                    -translate-y-1/2 duration-500">
+                    <p class="italic">
+                        Chứng nhận/ Canh tác: Chứng nhận Global Gap <br>
+                        Xuất xứ: Trang trại tại Cần Thơ, Việt Nam. <br>
+                        Công dụng: Cam sành giàu vitamin C, vitamin A, canxi, chất xơ… 
+                        rất bổ dưỡng cho cơ thể phụ nữ mang thai. 
+                        Vitamin B9 (axit folic) có trong cam sành vô cùng quan trọng, 
+                        đặc biệt đối với bà bầu hoặc những người đang cố gắng thụ thai. 
+                    </p>
+                    <h3>Cam sành</h3>
+                    
+                    <div class="text-yellow-500 text-xs py-3">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                        <i class="ri-star-line text-gray-400"></i>
+                    </div>
+
+                    <!-- <div class="flex items-center justify-between">
+                        <p class="text-xl">75,000₫</p>
+
+                        <button class="bg-yellow-500 px-2 py-1 rounded-sm text-xl">
+                            <i class="ri-shopping-cart-fill"></i>
+                        </button>
+                    </div> -->
+                 </div>
+
+                 <!-- card 3 -->
+                 <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative">
+                    <img src="assets/img/taoDazzle-removebg-preview.png" alt="popular_image"
+                    class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2
+                    -translate-y-1/2 duration-500">
+                    <p class="italic">
+                        Táo Dazzle có kích thước lớn, vỏ căng bóng và sáng, màu đỏ và thịt chắc có màu trắng sữa, hương vị thơm, ngon. <br>
+                        Do được trồng tại vùng đất của Vịnh Hawke, New Zealand màu mỡ và trù phú cùng với điều kiện nuôi dưỡng tốt, táo Dazzle luôn mang đến một độ tươi mới và đảm bảo độ an toàn.
+                    </p>
+                    <h3>Táo Dazzle hữu cơ</h3>
+                    
+                    <div class="text-yellow-500 text-xs py-3">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                        <i class="ri-star-line text-gray-400"></i>
+                    </div>
+
+                    <!-- <div class="flex items-center justify-between">
+                        <p class="text-xl">220,000₫</p>
+
+                        <button class="bg-yellow-500 px-2 py-1 rounded-sm text-xl">
+                            <i class="ri-shopping-cart-fill"></i>
+                        </button>
+                    </div> -->
+                 </div>
+
+                 <!-- card 4 -->
+                 <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative">
+                    <img src="assets/img/kiwi-removebg-preview.png" alt="popular_image"
+                    class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2
+                    -translate-y-1/2 duration-500">
+                    <p class="italic">
+                        Kiwi vàng Zespri Organic quả to, tươi ngon, mọng nước, cầm cứng tay, vị ngọt ngọt xen lẫn chua dịu nhẹ thanh mát, đặc trưng của Kiwi không thể lẫn vào đâu được. <br> 
+                        Giá trị dinh dưỡng của Kiwi: Quả kiwi lại chứa gấp đôi lượng vitamin C so với quả cam.
+                    </p>
+                    <h3>Kiwi vàng hữu cơ Zespi</h3>
+                    
+                    <div class="text-yellow-500 text-xs py-3">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                    </div>
+
+                    <!-- <div class="flex items-center justify-between">
+                        <p class="text-xl">379,000₫</p>
+
+                        <button class="bg-yellow-500 px-2 py-1 rounded-sm text-xl">
+                            <i class="ri-shopping-cart-fill"></i>
+                        </button>
+                    </div> -->
+                 </div>
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <a href="products.html" class="bg-yellow-500 text-green-950 px-6 py-2 rounded-md font-bold hover:bg-yellow-600 duration-300">
+                    Xem thêm
+                </a>
+            </div>
+        </section>
+
+        <!--~~~~~~~~~~~~~~~ Review ~~~~~~~~~~~~~~~-->
+        <section id="review" class="relative mb-20 md:mb-28 overflow-hidden">
+
+            <div class="reveiw_leaf absolute -top-8 -left-12 opacity-50">
+                <img src="assets/img/leaf-4.png" alt="leaf_image" class="w-40 md:w-52 xl:w-64">
+            </div>
+
+            <div class="review_top flex flex-col items-center gap-3 text-center mb-10
+            md:mb-20">
+                <h2 class="title">Đánh giá từ khách hàng</h2>
+                <p class="max-w-2xl">Follow instruction for more</p>
+            </div>
+
+            <div class="review_swiper container">
+                <div class="swiper py-12">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <div class="flex flex-col gap-5 bg-green-900 rounded-md p-6">
+                                <p class="font-Lobster">
+                                    Sản phẩm rất tươi ngon, giao hàng nhanh và đóng gói cẩn thận. 
+                                    Tôi rất hài lòng!
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="assets/img/review-1.jpg" alt="review_image"
+                                    class="w-12 h-12 rounded-full">
+                                    <div class="ml-2">
+                                        <p class="text-yellow-500 uppercase">Nguyễn Văn Nam</p>
+                                        <p>Nhân viên văn phòng</p>
+                                    </div>
+                                    <i class="ri-double-quotes-r text-4xl ml-auto"></i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="swiper-slide">
+                            <div class="flex flex-col gap-5 bg-green-900 rounded-md p-6">
+                                <p class="font-Lobster">
+                                    Rau củ hữu cơ rất sạch và an toàn, tôi sẽ tiếp tục ủng hộ cửa hàng.
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="assets/img/review-2.jpg" alt="review_image"
+                                    class="w-12 h-12 rounded-full">
+                                    <div class="ml-2">
+                                        <p class="text-yellow-500 uppercase">Trần Thị Mai</p>
+                                        <p>Giáo viên</p>
+                                    </div>
+                                    <i class="ri-double-quotes-r text-4xl ml-auto"></i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="swiper-slide">
+                            <div class="flex flex-col gap-5 bg-green-900 rounded-md p-6">
+                                <p class="font-Lobster">
+                                    Dịch vụ chăm sóc khách hàng rất tốt, nhân viên tư vấn nhiệt tình.
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="assets/img/review-3.jpg" alt="review_image"
+                                    class="w-12 h-12 rounded-full">
+                                    <div class="ml-2">
+                                        <p class="text-yellow-500 uppercase">Lê Minh Tuấn</p>
+                                        <p>Kỹ sư</p>
+                                    </div>
+                                    <i class="ri-double-quotes-r text-4xl ml-auto"></i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="swiper-slide">
+                            <div class="flex flex-col gap-5 bg-green-900 rounded-md p-6">
+                                <p class="font-Lobster">
+                                    Tôi rất thích các loại trái cây ở đây, tươi ngon và giá cả hợp lý.
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="assets/img/review-4.jpg" alt="review_image"
+                                    class="w-12 h-12 rounded-full">
+                                    <div class="ml-2">
+                                        <p class="text-yellow-500 uppercase">Phạm Thị Hồng</p>
+                                        <p>Nội trợ</p>
+                                    </div>
+                                    <i class="ri-double-quotes-r text-4xl ml-auto"></i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="swiper-slide">
+                            <div class="flex flex-col gap-5 bg-green-900 rounded-md p-6">
+                                <p class="font-Lobster">
+                                    Giao hàng đúng hẹn, sản phẩm đúng như mô tả. Sẽ giới thiệu cho bạn bè!
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="assets/img/review-1.jpg" alt="review_image"
+                                    class="w-12 h-12 rounded-full">
+                                    <div class="ml-2">
+                                        <p class="text-yellow-500 uppercase">Đỗ Quang Hưng</p>
+                                        <p>Doanh nhân</p>
+                                    </div>
+                                    <i class="ri-double-quotes-r text-4xl ml-auto"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--~~~~~~~~~~~~~~~ Footer ~~~~~~~~~~~~~~~-->
+    <footer class="bg-yellow-100 text-green-950 pt-20 pb-10 md:pt-28 relative">
+        <!-- newsletter -->
+        <div class="container text-white absolute top-0 right-0 left-0 
+        -translate-y-1/2">
+            <div class="bg-green-900 px-10 pt-5 pb-10 scale-y-5 rounded-md">
+                <h3><span class="text-yellow-500">Đăng ký</span> để nhận những ưu đãi từ chúng tôi</h3>
+                
+                <div class="flex flex-col md:flex-row gap-1">
+                    <input type="email" placeholder="Địa chỉ Email"
+                    class="w-full px-5 py-3 text-green-900 rounded-md 
+                    outline-none">
+                    <button class="flex items-center justify-center gap-1 
+                    bg-green-950 px-5 py-3 rounded-md hover:opacity-80 
+                    duration-300">
+                        <span>Đăng Ký</span>
+                        <i class="ri-send-plane-2-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- social icon -->
+        <div class="footer_icon container mt-16 mb-10">
+            <div class="border-b border-green-500 relative">
+                 <div class="absolute top-0 transform -translate-y-1/2 left-0
+                 right-0 max-w-36 mx-auto">
+                    <div class="bg-yellow-100 text-lg text-center space-x-2">
+                        <a href="https://www.facebook.com/profile.php?id=61576912419504" target="_blank" rel="noopener">
+                            <i class="ri-facebook-fill hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                        </a>
+                        <i class="ri-twitter-x-line hover:text-yellow-500 
+                        duration-300 cursor-pointer text-base"></i>
+                        <i class="ri-instagram-line hover:text-yellow-500 
+                        duration-300 cursor-pointer"></i>
+                        <i class="ri-linkedin-fill hover:text-yellow-500 
+                        duration-300 cursor-pointer"></i>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="footer_content container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+        xl:grid-cols-4 gap-8 text-center md:text-start">
+            <!-- item 1 -->
+             <div>
+                <div class="text-7xl text-green-700 text-center inline-block">
+                    <img src="assets/img/avatar.ico" alt="Logo" class="w-20 h-20 mx-auto" />
+                    <p class="font-Lobster text-xl sm:text-2xl">GreenEco Heaven</p>
+                </div>
+             </div>
+
+             <!-- item 2 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Truy Cập Nhanh</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="#">Plants</a>
+                    <a href="#">Fruits</a>
+                    <a href="#">Gerdening</a>
+                    <a href="#">Seeds</a>
+                    <a href="#">Shipping</a>
+                </div>
+              </div>
+
+              <!-- item 3 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Các Dịch Vụ Phổ Biến</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="#">Tree Planting</a>
+                    <a href="#">Grass Cutting</a>
+                    <a href="#">Weeds Control</a>
+                    <a href="#">Project</a>
+                </div>
+              </div>
+
+              <!-- item 4 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Liên Hệ</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="tel:+84813453366">+84 81 3453366</a>
+                    <a href="mailto:greenEcoHeaven@gmail.com">greenEcoHeaven@gmail.com</a>
+                    <br>
+                    <p>Thạch Thất, Hà Nội, Việt Nam</p>
+                </div>
+              </div>
+        </div>
+
+        <!-- copyright -->
+        <div class="copy_right container">
+            <p class="text-center mt-10 opacity-50">© 2025 GreenEco Heaven. Đã đăng ký bản quyền.</p>
+        </div>
+
+        <!-- floral image -->
+        <div class="footer_floral absolute bottom-0 left-0 opacity-20 pointer-events-none"> 
+            <img src="assets/img/floral-1.png" alt="floral_image" class="w-full lg:w-1/2">
+        </div>
+
+    </footer>
+
+    <!--~~~~~~~~~~~~~~~ Scroll Up ~~~~~~~~~~~~~~~-->
+    <a href="#" class="fixed right-4 -bottom-1/2 bg-yellow-500 shadow-sm
+    inline-block px-3 py-1 md:px-4 md:py-2 rounded-md text-lg z-50
+    hover:-translate-y-1 duration-300" id="scroll-up">
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--~~~~~~~~~~~~~~~ Swiper JS ~~~~~~~~~~~~~~~-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+    <script src="assets/js/scrollreveal.min.js"></script>
+
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="main.js"></script>
+    
+    <!--~~~~~~~~~~ modal giỏ hàng ~~~~~~~~~~-->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-green-900 rounded-lg p-6 w-full max-w-md relative">
+            <button id="close-cart" class="absolute top-2 right-2 text-xl bg-yellow-500 
+            rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 
+            hover:text-white transition">&times;</button>
+            <h2 class="text-xl font-bold mb-4">Giỏ hàng</h2>
+            <div id="cart-items" class="space-y-3"></div>
+            <div class="mt-4 flex justify-between font-bold">
+                <span>Tổng cộng:</span>
+                <span id="cart-total">0₫</span>
+            </div>
+            <button id="pay-btn" class="mt-6 w-full bg-yellow-500 text-green-950 font-bold py-2 rounded hover:bg-yellow-600 duration-300">
+                Thanh toán
+            </button>
+        </div>
+    </div>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartBtn = document.getElementById('cart-btn');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCart = document.getElementById('close-cart');
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const payBtn = document.getElementById('pay-btn');
+            const checkoutModal = document.getElementById('checkout-modal');
+            const closeCheckout = document.getElementById('close-checkout');
+            const checkoutForm = document.getElementById('checkout-form');
+            const qrModal = document.getElementById('qr-modal');
+            const closeQr = document.getElementById('close-qr');
+            const thankyouModal = document.getElementById('thankyou-modal');
+            const closeThankyou = document.getElementById('close-thankyou');
+
+            // Kiểm tra xem các phần tử có tồn tại không
+            if (!payBtn || !checkoutModal || !closeCheckout || !checkoutForm) {
+                console.error('One or more elements not found:', {
+                    payBtn, checkoutModal, closeCheckout, checkoutForm
+                });
+                return;
+            }
+
+            let cart = [];
+
+            function updateCart() {
+                cartItems.innerHTML = '';
+                let total = 0;
+                cart.forEach((item, idx) => {
+                    total += item.price * item.qty;
+                    cartItems.innerHTML += `
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <div>
+                                <div class="font-bold">${item.name}</div>
+                                <div class="text-xs text-yellow-500">${item.price.toLocaleString()}₫ x ${item.qty}</div>
+                            </div>
+                            <button onclick="removeFromCart(${idx})" class="text-red-500 text-lg">×</button>
+                        </div>
+                    `;
+                });
+                cartTotal.textContent = total.toLocaleString() + '₫';
+                cartCount.textContent = cart.length;
+            }
+
+            window.removeFromCart = function(idx) {
+                cart.splice(idx, 1);
+                updateCart();
+            };
+
+            document.querySelectorAll('.ri-shopping-cart-fill').forEach(btn => {
+                btn.closest('button').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const card = btn.closest('.popular_card, .product-item, .bg-green-900');
+                    const name = card.querySelector('h3, h2').textContent.trim();
+                    const price = Number(card.querySelector('.text-xl, .text-yellow-400').textContent.replace(/[^\d]/g, ''));
+                    const found = cart.find(item => item.name === name);
+                    if (found) {
+                        found.qty += 1;
+                    } else {
+                        cart.push({ name, price, qty: 1 });
+                    }
+                    updateCart();
+                });
+            });
+
+            cartBtn.addEventListener('click', e => {
+                e.preventDefault();
+                cartModal.classList.remove('hidden');
+            });
+
+            closeCart.addEventListener('click', () => cartModal.classList.add('hidden'));
+
+            // Mở checkout modal khi nhấn nút Thanh toán
+            payBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Pay button clicked');
+                if (cart.length === 0) {
+                    alert('Giỏ hàng trống! Vui lòng thêm sản phẩm trước khi thanh toán.');
+                    return;
+                }
+                console.log('Opening checkout modal');
+                cartModal.classList.add('hidden');
+                checkoutModal.classList.remove('hidden');
+            });
+
+            // Đóng checkout modal
+            closeCheckout.addEventListener('click', () => {
+                console.log('Closing checkout modal');
+                checkoutModal.classList.add('hidden');
+            });
+
+            // Xử lý gửi form checkout
+            checkoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Checkout form submitted');
+                const formData = new FormData(checkoutForm);
+                const paymentMethod = formData.get('payment');
+
+                // Đóng checkout modal
+                checkoutModal.classList.add('hidden');
+
+                if (paymentMethod === 'online') {
+                    console.log('Opening QR modal');
+                    qrModal.classList.remove('hidden');
+                } else {
+                    console.log('Opening thankyou modal');
+                    thankyouModal.classList.remove('hidden');
+                    cart = [];
+                    updateCart();
+                }
+            });
+
+            // Đóng QR modal
+            closeQr.addEventListener('click', () => {
+                console.log('Closing QR modal');
+                qrModal.classList.add('hidden');
+                thankyouModal.classList.remove('hidden');
+                cart = [];
+                updateCart();
+            });
+
+            // Đóng thankyou modal
+            closeThankyou.addEventListener('click', () => {
+                console.log('Closing thankyou modal');
+                thankyouModal.classList.add('hidden');
+            });
+        });
+    </script> -->
+
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md relative flex flex-col items-center">
+            <button id="close-checkout" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">&times;</button>
+            <h2 class="text-lg font-bold mb-4 text-green-900">Thông tin đặt hàng</h2>
+            <form id="checkout-form" class="w-full flex flex-col gap-3">
+                <input required type="text" name="name" placeholder="Họ và tên" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="tel" name="phone" placeholder="Số điện thoại" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="text" name="address" placeholder="Địa chỉ nhận hàng" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <div class="flex flex-col gap-2 mt-2 text-green-900">
+                    <label class="font-bold">Chọn phương thức thanh toán:</label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="payment" value="cod" checked>
+                        Thanh toán khi nhận hàng
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="payment" value="online">
+                        Thanh toán ngay
+                    </label>
+                </div>
+                <button type="submit" class="mt-4 w-full bg-yellow-500 text-green-950 font-bold py-2 rounded hover:bg-yellow-600 duration-300">
+                    Xác nhận đặt hàng
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal cảm ơn -->
+    <div id="thankyou-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-xs relative flex flex-col items-center">
+            <button id="close-thankyou" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">&times;</button>
+            <h2 class="text-lg font-bold mb-4 text-green-900">Cảm ơn bạn đã đặt hàng!</h2>
+            <p class="text-center text-green-900">Chúng tôi sẽ liên hệ và giao hàng sớm nhất.</p>
+        </div>
+    </div>
+
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 w-full max-w-md relative flex flex-col items-center">
+            <button id="close-qr" class="absolute top-2 right-2 text-2xl bg-yellow-500 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
+            <h2 class="text-xl font-bold mb-6 text-green-900">Quét mã QR để thanh toán</h2>
+            <img src="assets/img/QR-code.png" alt="QR code thanh toán" class="w-64 h-64 object-contain mb-4">
+            <p class="text-center text-lg text-green-900">Vui lòng quét mã QR để hoàn tất thanh toán</p>
+        </div>
+    </div>
+</body>
+
+</html>

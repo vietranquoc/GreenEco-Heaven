@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/avatar.ico " type="image/x-icon">
+    <title>Tất cả sản phẩm | GreenEco Heaven</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+    <link rel="stylesheet" href="./output.css">
+</head>
+<body class="bg-green-50 text-green-900">
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+    <header id="navbar" class="bg-green-950 fixed w-full top-0 left-0 z-50">
+        <nav class="container flex items-center justify-between h-16 sm:h-20">
+            <div class="font-Lobster sm:text-2xl">
+                <a href="index.html" class="font-Lobster text-2xl text-yellow-500">GreenEco Heaven</a>
+            </div>
+            
+            <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full
+            bg-green-950/80 backdrop-blur-sm flex items-center justify-center
+            duration-300 overflow-hidden lg:static lg:min-h-fit
+            lg:bg-transparent lg:w-auto">
+                <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                    <li>
+                        <a href="index.html#home" class="nav-link">Trang chủ</a>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html#about" class="nav-link">Về chúng tôi</a>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html#popular" class="nav-link">Sản phẩm nổi bật</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html#review" class="nav-link">Đánh giá</a>
+                    </li>
+                </ul>
+
+                <a href="#" id="cart-btn" class="relative ml-4">
+                    <i class="ri-shopping-cart-2-line text-2xl text-yellow-500"></i>
+                    <span id="cart-count" class="absolute top-1 right-1 bg-red-500 
+                    text-white text-xs rounded-full px-1">0</span>
+                </a>
+
+                <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+                    <img src="assets/img/leaf-1.png" alt="Leaf_image" class="w-32">
+                </div>
+
+                <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden ">
+                    <img src="assets/img/leaf-2.png" alt="Leaf_image" class="w-32">
+                </div>
+            </div>
+
+            <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+                <i class="ri-menu-4-line" id="hamburger"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto py-12">
+        <h1 class="text-3xl font-bold text-center mb-10">Tất cả sản phẩm</h1>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            
+            <!-- Sản phẩm 1 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="1">
+                <img src="assets/img/bapcai-removebg-preview.png" alt="Bắp cải hữu cơ" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bắp cải hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Bắp cải được trồng theo phương pháp hữu cơ, không sử dụng thuốc trừ sâu hay phân bón hóa học.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">75,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill "></i> Thêm vào giỏ
+                </button>
+            </div>
+            
+            <!-- Sản phẩm 2 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="2">
+                <img src="assets/img/camSanh-removebg-preview.png" alt="Cam sành" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bắp cải hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Cam sành giàu vitamin C, canxi, chất xơ, tốt cho sức khỏe và đặc biệt phù hợp cho bà bầu.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">75,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+            
+            <!-- Sản phẩm 3 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="3">
+                <img src="assets/img/taoDazzle-removebg-preview.png" alt="Táo Dazzle hữu cơ" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Táo Dazzle hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Táo Dazzle nhập khẩu, vỏ đỏ căng bóng, thịt trắng sữa, vị thơm ngon, an toàn cho sức khỏe.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">220,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+            
+            <!-- Sản phẩm 4 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="4">
+                <img src="assets/img/kiwi-removebg-preview.png" alt="Kiwi vàng hữu cơ Zespri" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Kiwi vàng hữu cơ Zespri</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Kiwi vàng Zespri quả to, mọng nước, vị ngọt thanh, chứa nhiều vitamin C tốt cho sức khỏe.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">379,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 5 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="5">
+                <img src="assets/img/bauHuCo-removebg-preview.png" alt="Bau Huu Co" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bầu hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">85,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 6 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="6">
+                <img src="assets/img/biDo-removebg-preview.png" alt="Bi do" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bí đỏ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">105,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 7 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="7">
+                <img src="assets/img/bongCaiXanh-removebg-preview.png" alt="bong cai xanh" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bông cải xanh</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">150,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 8 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="8">
+                <img src="assets/img/Bo-removebg-preview.png" alt="Bo" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bơ 034</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">115,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 9 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="9">
+                <img src="assets/img/buoiDaXanh-removebg-preview.png" alt="Buoi da xanh" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bưởi da xanh</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">85,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 10 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="10">
+                <img src="assets/img/buoiNamRoi-removebg-preview.png" alt="Buoi nam roi" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bưởi năm roi</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">80,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 11 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="11">
+                <img src="assets/img/caiNgot-removebg-preview.png" alt="cai ngot" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Cải ngọt hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">75,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 12 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="12">
+                <img src="assets/img/caiThia-removebg-preview.png" alt="cai thia" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Cải thìa</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">85,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 13 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="13">
+                <img src="assets/img/camCaoPhong-removebg-preview.png" alt="cam cao phong" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Cam Cao Phong</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">110,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 14 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="14">
+                <img src="assets/img/camValencia-removebg-preview.png" alt="Cam valencia" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Cam Valencia</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">105,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 15 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="15">
+                <img src="assets/img/cherry-removebg-preview.png" alt="Cherry" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Cherry hữu cơ size 28</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">1,150,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 16 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="16">
+                <img src="assets/img/chuoi-removebg-preview.png" alt="Chuoi" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Chuối già hữu cơ<h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">65,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 17 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="17">
+                <img src="assets/img/dauTay-removebg-preview.png" alt="Dau tay" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Dâu tây</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">1,200,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 18 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="18">
+                <img src="assets/img/duaLuoi-removebg-preview.png" alt="Dua luoi" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Dưa lưới hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">155,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 19 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="19">
+                <img src="assets/img/dua-removebg-preview.png" alt="dua" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Dứa</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">85,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 20 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="20">
+                <img src="assets/img/duBo-removebg-preview.png" alt="dua bo" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Dưa bở hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">85,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 21 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="21">
+                <img src="assets/img/duDu-removebg-preview.png" alt="du du" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Đu đủ hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">70,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 22 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="22">
+                <img src="assets/img/ginger-removebg-preview.png" alt="gung" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Củ gừng</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">250,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 23 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="23">
+                <img src="assets/img/honHoprauGiaVi-removebg-preview.png" alt="hon hop rau gia vi" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Hỗn hợp rau gia vị hữu cơ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">150,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 24 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="24">
+                <img src="assets/img/khoaiSo-removebg-preview.png" alt="khoai so" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Khoai sọ</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">125,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 25 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="25">
+                <img src="assets/img/botGaoLutHuuCoMua300gr-removebg-preview.png" alt="bot gao lut huu co 300gr" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bột gạo lứt hữu cơ Mùa 300gr</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Đang cập nhật nội dung.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">120,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 26 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="26">
+                <img src="assets/img/bunSayKho-removebg-preview.png" alt="bun say kho" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Bún tươi sấy khô gạo huyết rồng Mekong River 300g</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Xuất xứ: Sản phẩm được sản xuất tại Việt Nam. <br>
+                    Thành phần: Gạo (54%), gạo huyết rồng (30%), nước, muối. <br>
+                    Thể tích thực: 300gr. <br>
+                    Hạn sử dụng: In trên bao bì. <br>
+                    Gợi ý sử dụng: ngâm hoặc luộc bún để làm món xào hoặc món nước. <br>
+                    Hướng dẫn bảo quản: bảo quản nơi khô ráo, thoáng mát.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">45,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 27 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="27">
+                <img src="assets/img/dauDenXanhLogng-removebg-preview.png" alt="dau den xanh long" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Đậu đen xanh lòng hữu cơ Mùa 500g</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ và EU của châu Âu. <br>
+                    Xuất xứ: Sản phẩm được đóng gói tại Việt Nam <br>
+                    Khối lượng tịnh: 500g <br>
+                    Thành phần: 100% Đậu đen <br>
+                    Công dụng: Đậu đen giúp duy trì xương khỏe mạnh, ngăn ngừa bệnh tim và huyết áp, tốt cho người bị bệnh tiểu đường, 
+                    ngăn ngừa ung thư, tác dụng giảm cân, tăng cường hệ thần kinh. ... <br>
+                    Gợi ý sử dụng: Dùng để chế biến các món ăn như salad, súp, món hầm, món tráng miệng hoặc làm
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">140,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 28 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="28">
+                <img src="assets/img/dauDoHuuCo-removebg-preview.png" alt="dau do huu co" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Đậu đỏ hữu cơ Mùa 500gr</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ và EU của châu Âu. <br>
+                    Xuất xứ: Sản phẩm được đóng gói tại Việt Nam <br>
+                    Khối lượng tịnh: 500g <br>
+                    Thành phần: 100% Đậu đỏ <br>
+                    Công dụng: Đậu đỏ chứa hàm lượng chất chống oxy hóa cao, giúp bảo vệ cơ thể và ngăn ngừa lão hóa da sớm. 
+                    Hàm lượng kali trong đậu đỏ giúp kiểm soát huyết áp. 
+                    Đồng thời, nhờ hàm lượng chất xơ cao tạo cảm giác no lâu, giúp cải thiện hoạt động của dạ dày, đường ruột, giảm nguy cơ xơ vữa
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">140,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 29 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="29">
+                <img src="assets/img/dauNanh-removebg-preview.png" alt="dau nanh" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Đậu nành hữu cơ Mùa 1Kg</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ và EU của châu Âu. <br>
+                    Xuất xứ: Sản phẩm được đóng gói tại Việt Nam <br>
+                    Khối lượng tịnh: 500g <br>
+                    Thành phần: 100% Đậu nành hữu cơ. <br>
+                    Công dụng: Đậu nành là một nguồn thực phẩm có giá trị dinh dưỡng cao, giàu chất đạm, 
+                    isoflavones, chất béo chưa bão hòa, các vitamin, khoáng chất, carbohydrate phức hợp và chất xơ. 
+                    Các sản phẩm từ đậu nành như đậu phụ, sữa đậu nành, tào phớ, cháo…là những món ăn phong phú, 
+                    ngon miệng.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">165,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 30 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="30">
+                <img src="assets/img/dauphong-removebg-preview.png" alt="dau phong" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Đậu phộng Mùa 250g</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ và EU của châu Âu. <br>
+                    Xuất xứ: Sản phẩm được đóng gói tại Việt Nam <br>
+                    Khối lượng tịnh: 500g <br>
+                    Thành phần: 100% Đậu phộng <br>
+                    Công dụng: Đậu phộng chứa vitamin E, protein, khoáng chất như mangan, 
+                    hỗ trợ cơ thể hấp thu canxi và ổn định đường huyết. Các dưỡng chất trong đậu phộng 
+                    còn có tác dụng hỗ trợ kiểm soát hàm lượng cholesterol có trong máu. Đậu phộng thích 
+                    hợp dùng làm nguyên liệu chế biến nhiều món
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">99,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 31 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="31">
+                <img src="assets/img/gaoLutST25-removebg-preview.png" alt="gao lut st25" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Gạo Lứt ST25 hữu cơ Mùa 2kg</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Lúa Mùa trồng tại Vĩnh Long, các giống gạo tập trung vào các loại gạo thảo dược 
+                    và gạo tốt cho sức khỏe. Phương pháp canh tác tuân thủ theo những yêu cầu của tiêu chuẩn 
+                    hữu cơ Mỹ, châu Âu và Nhật Bản: không sử dụng giống biến đổi gen, không đấu trộn. <br>
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ, 
+                    tiêu chuẩn EU của Châu Âu và tiêu chuẩn JAS của Nhật Bản. <br>
+                    Xuất xứ: Vĩnh Long - Việt Nam. <br>
+                    Khối lượng tịnh: 2kg.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">169,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+
+            <!-- Sản phẩm 32 -->
+            <div class=" bg-green-900 rounded-md p-6 flex flex-col items-center h-full product-item" data-index="32">
+                <img src="assets/img/gaoTamST25Mua2kg-removebg-preview.png" alt="gao tam st25" class="w-40 mb-4">
+                <h2 class="font-bold text-xl mb-2 text-yellow-500">Gạo tấm ST25 hữu cơ Mùa 2kg</h2>
+                <p class="italic mb-2 text-slate-200 text-center flex-1">
+                    Lúa Mùa trồng tại Vĩnh Long, các giống gạo tập trung vào các loại gạo thảo dược và 
+                    gạo tốt cho sức khỏe. Phương pháp canh tác tuân thủ theo những yêu cầu của tiêu chuẩn hữu cơ Mỹ, 
+                    châu Âu và Nhật Bản: Không sủ dụng phân bón hóa học, không thuốc bảo vệ thực vật hóa học, 
+                    không chất bảo quản - tẩy trắng - thuốc chống mối mọt, không sử dụng giống biến đổi gen, 
+                    không đấu trộn. <br>
+                    Chứng nhận: Chứng nhận hữu cơ tiêu chuẩn USDA của Mỹ, 
+                    tiêu chuẩn EU của Châu Âu và tiêu chuẩn JAS của Nhật Bản. <br>
+                    Xuất xứ: Vĩnh Long - Việt Nam. <br>
+                    Khối lượng tịnh: 2kg.
+                </p>
+                <p class="text-lg font-bold mb-2 text-yellow-400">169,000₫</p>
+                <button class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300 w-full mt-2">
+                    <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                </button>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-8" id="pagination"></div>
+    </main>
+
+    <!--~~~~~~~~~~~~~~~ Footer ~~~~~~~~~~~~~~~-->
+    <footer class="bg-yellow-100 text-green-950 pt-20 pb-10 md:pt-28 relative">
+        <!-- social icon -->
+        <div class="footer_icon container mt-16 mb-10">
+            <div class="border-b border-green-500 relative">
+                 <div class="absolute top-0 transform -translate-y-1/2 left-0
+                 right-0 max-w-36 mx-auto">
+                    <div class="bg-yellow-100 text-lg text-center space-x-2">
+                        <i class="ri-facebook-fill hover:text-yellow-500 
+                        duration-300 cursor-pointer"></i>
+                        <i class="ri-twitter-x-line hover:text-yellow-500 
+                        duration-300 cursor-pointer text-base"></i>
+                        <i class="ri-instagram-line hover:text-yellow-500 
+                        duration-300 cursor-pointer"></i>
+                        <i class="ri-linkedin-fill hover:text-yellow-500 
+                        duration-300 cursor-pointer"></i>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="footer_content container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+        xl:grid-cols-4 gap-8 text-center md:text-start">
+            <!-- item 1 -->
+             <div>
+                <div class="text-7xl text-green-700 text-center inline-block">
+                    <img src="assets/img/avatar.ico" alt="Logo" class="w-20 h-20 mx-auto" />
+                    <p class="font-Lobster text-xl sm:text-2xl">GreenEco Heaven</p>
+                </div>
+             </div>
+
+             <!-- item 2 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Truy Cập Nhanh</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="#">Plants</a>
+                    <a href="#">Fruits</a>
+                    <a href="#">Gerdening</a>
+                    <a href="#">Seeds</a>
+                    <a href="#">Shipping</a>
+                </div>
+              </div>
+
+              <!-- item 3 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Các Dịch Vụ Phổ Biến</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="#">Tree Planting</a>
+                    <a href="#">Grass Cutting</a>
+                    <a href="#">Weeds Control</a>
+                    <a href="#">Project</a>
+                </div>
+              </div>
+
+              <!-- item 4 -->
+              <div>
+                <p class="mb-5 font-bold text-xl">Liên Hệ</p>
+
+                <div class="flex flex-col gap-1">
+                    <a href="tel:+84813453366">+84 81 3453366</a>
+                    <a href="mailto:greenEcoHeaven@gmail.com">greenEcoHeaven@gmail.com</a>
+                    <br>
+                    <p>Thạch Thất, Hà Nội, Việt Nam</p>
+                </div>
+              </div>
+        </div>
+
+        <!-- copyright -->
+        <div class="copy_right container">
+            <p class="text-center mt-10 opacity-50">© 2025 GreenEco Heaven. Đã đăng ký bản quyền.</p>
+        </div>
+
+        <!-- floral image -->
+        <div class="footer_floral absolute bottom-0 left-0 opacity-20 pointer-events-none"> 
+            <img src="assets/img/floral-1.png" alt="floral_image" class="w-full lg:w-1/2">
+        </div>
+
+    </footer>
+
+    <!--~~~~~~~~~~~~~~~ Scroll Up ~~~~~~~~~~~~~~~-->
+    <a href="#" class="fixed right-4 -bottom-1/2 bg-yellow-500 shadow-sm
+    inline-block px-3 py-1 md:px-4 md:py-2 rounded-md text-lg z-50
+    hover:-translate-y-1 duration-300" id="scroll-up">
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--~~~~~~~~~~~~~~~ Swiper JS ~~~~~~~~~~~~~~~-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+    <script src="assets/js/scrollreveal.min.js"></script>
+
+    <!--~~~~~~~~~~ EmailJS ~~~~~~~~~~-->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="main.js"></script>
+
+    <!-- <script>
+    const productsPerPage = 8;
+    const products = document.querySelectorAll('.product-item');
+    const totalProducts = products.length;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+    const pagination = document.getElementById('pagination');
+
+    function showPage(page) {
+        products.forEach((item, idx) => {
+            if (idx >= (page-1)*productsPerPage && idx < page*productsPerPage) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        // Highlight nút trang hiện tại
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.classList.remove('bg-yellow-500', 'text-green-950');
+            btn.classList.add('bg-yellow-200', 'text-green-700');
+        });
+        document.getElementById('page-btn-' + page).classList.add('bg-yellow-500', 'text-green-950');
+        document.getElementById('page-btn-' + page).classList.remove('bg-yellow-200', 'text-green-700');
+    }
+
+    // Tạo nút phân trang
+    let pagHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+        pagHTML += `<button id="page-btn-${i}" class="page-btn mx-1 px-3 py-1 rounded bg-yellow-200 text-green-700 font-bold hover:bg-yellow-400 duration-200">${i}</button>`;
+    }
+    pagination.innerHTML = pagHTML;
+
+    // Gán sự kiện click cho các nút
+    for (let i = 1; i <= totalPages; i++) {
+        document.getElementById('page-btn-' + i).addEventListener('click', () => showPage(i));
+    }
+
+    // Hiển thị trang đầu tiên khi load
+    showPage(1);
+    </script> -->
+
+    <!--~~~~~~~~~~ modal giỏ hàng ~~~~~~~~~~-->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-green-900 text-white rounded-lg p-6 w-full max-w-md relative">
+            <button id="close-cart" class="absolute top-2 right-2 text-xl bg-yellow-500 
+            rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 
+            hover:text-white transition">&times;</button>
+            <h2 class="text-xl font-bold mb-4">Giỏ hàng</h2>
+            <div id="cart-items" class="space-y-3"></div>
+            <div class="mt-4 flex justify-between font-bold">
+                <span>Tổng cộng:</span>
+                <span id="cart-total">0₫</span>
+            </div>
+            <button id="pay-btn" class="mt-6 w-full bg-yellow-500 text-green-950 font-bold py-2 rounded hover:bg-yellow-600 duration-300">
+                Thanh toán
+            </button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md relative flex flex-col items-center">
+            <button id="close-checkout" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">&times;</button>
+            <h2 class="text-lg font-bold mb-4 text-green-900">Thông tin đặt hàng</h2>
+            <form id="checkout-form" class="w-full flex flex-col gap-3">
+                <input required type="text" name="name" placeholder="Họ và tên" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="tel" name="phone" placeholder="Số điện thoại" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="text" name="address" placeholder="Địa chỉ nhận hàng" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <div class="flex flex-col gap-2 mt-2 text-green-900">
+                    <label class="font-bold">Chọn phương thức thanh toán:</label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="payment" value="cod" checked>
+                        Thanh toán khi nhận hàng
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="payment" value="online">
+                        Thanh toán ngay
+                    </label>
+                </div>
+                <button type="submit" class="mt-4 w-full bg-yellow-500 text-green-950 font-bold py-2 rounded hover:bg-yellow-600 duration-300">
+                    Xác nhận đặt hàng
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal cảm ơn -->
+    <div id="thankyou-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-xs relative flex flex-col items-center">
+            <button id="close-thankyou" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">&times;</button>
+            <h2 class="text-lg font-bold mb-4 text-green-900">Cảm ơn bạn đã đặt hàng!</h2>
+            <p class="text-center text-green-900">Chúng tôi sẽ liên hệ và giao hàng sớm nhất.</p>
+        </div>
+    </div>
+
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 w-full max-w-md relative flex flex-col items-center">
+            <button id="close-qr" class="absolute top-2 right-2 text-2xl bg-yellow-500 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
+            <h2 class="text-xl font-bold mb-6 text-green-900">Quét mã QR để thanh toán</h2>
+            <img src="assets/img/QR-code.png" alt="QR code thanh toán" class="w-64 h-64 object-contain mb-4">
+            <p class="text-center text-lg text-green-900">Vui lòng quét mã QR để hoàn tất thanh toán</p>
+        </div>
+    </div>
+</body>
+</html>
