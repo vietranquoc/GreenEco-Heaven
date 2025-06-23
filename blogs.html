@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/avatar.ico" type="image/x-icon">
+    <title>Blog hữu cơ - GreenEco Heaven</title>
+    <link rel="stylesheet" href="./output.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .accordion-content.open {
+            max-height: 2000px;
+            transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+    </style>
+</head>
+<body class="bg-green-50 text-green-900">
+    <header class="bg-green-950 py-4 text-white">
+        <div class="container flex items-center justify-between">
+            <div class="font-Lobster text-2xl text-yellow-500">
+                <a href="index.html">GreenEco Heaven</a>
+            </div>
+            <nav class="space-x-4">
+                <a href="index.html" class="hover:text-yellow-500">Trang chủ</a>
+                <a href="#" class="text-yellow-500 font-bold">Blog</a>
+            </nav>
+        </div>
+    </header>
+    <main class="py-12">
+        <div class="container max-w-3xl mx-auto">
+            <nav class="text-sm mb-6 text-gray-500">
+                <a href="index.html" class="hover:underline">Trang chủ</a> <span class="mx-2">/</span>
+                <span class="text-green-900 font-semibold">Blog</span>
+            </nav>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-10 text-green-900 text-center">Tất cả bài viết Blog hữu cơ</h1>
+            <!-- Mục lục -->
+            <div class="mb-10">
+                <h2 class="text-xl font-bold mb-2">Mục lục</h2>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li><a href="#blog1" class="toc-link text-green-700 hover:underline">Thực phẩm hữu cơ và những điều cần biết để sống xanh sống khỏe</a></li>
+                    <li><a href="#blog2" class="toc-link text-green-700 hover:underline">Quy trình sản xuất thực phẩm hữu cơ tại GC Food</a></li>
+                    <li><a href="#blog3" class="toc-link text-green-700 hover:underline">Thực phẩm hữu cơ là gì và có tốt hơn các loại thực phẩm khác không?</a></li>
+                </ul>
+            </div>
+            <!-- Accordion bài viết -->
+            <div class="space-y-8">
+                <!-- Bài viết 1 -->
+                <div class="rounded-2xl shadow-lg border border-gray-200 bg-white">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-5 focus:outline-none accordion-header" id="blog1">
+                        <span class="text-xl md:text-2xl font-bold text-left">Thực phẩm hữu cơ và những điều cần biết để sống xanh sống khỏe</span>
+                        <span class="accordion-icon text-2xl transition-transform">&#9660;</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <img src="/assets/img/thuc-pham-huu-co-5.png" alt="Thực phẩm hữu cơ" class="rounded-xl w-full h-64 object-cover mb-6 shadow">
+                        <div class="prose max-w-none">
+                            <h3>Thực phẩm hữu cơ (Organic Food) là gì?</h3>
+                            <p><strong>Thực phẩm hữu cơ</strong> là những sản phẩm đạt chuẩn và được chứng nhận bởi các tổ chức uy tín như USDA (Hoa Kỳ), NASAA (Úc), Control Union (Châu Âu)... Để được coi là hữu cơ, nguồn thức ăn phải tuân thủ các chuẩn 3 KHÔNG:</p>
+                            <ul>
+                                <li>Không dùng hương liệu, phẩm màu, chất bảo quản, chất làm đặc.</li>
+                                <li>Không sử dụng hóa chất và hormone tăng trưởng.</li>
+                                <li>Không sử dụng nguyên liệu biến đổi gene (Non GMO), không chiếu xạ tiệt trùng.</li>
+                            </ul>
+                            <h3>Tại sao thực phẩm hữu cơ an toàn cho sức khỏe?</h3>
+                            <ul>
+                                <li>Chứa nhiều chất chống oxy hóa, giúp giảm nguy cơ bệnh tim mạch, ung thư, đường huyết cao.</li>
+                                <li>Không chứa hóa chất độc hại, giữ trọn dinh dưỡng tự nhiên.</li>
+                                <li>Không sử dụng sinh vật biến đổi gene.</li>
+                                <li>Hương vị tự nhiên, cấu trúc giòn, thơm ngon.</li>
+                                <li>Tốt cho môi trường, giảm ô nhiễm đất và nước.</li>
+                            </ul>
+                            <h3>Các thực phẩm nên sử dụng loại hữu cơ</h3>
+                            <ul>
+                                <li>Thịt bò hữu cơ</li>
+                                <li>Rau củ quả hữu cơ</li>
+                                <li>Trứng, sữa, các loại hạt hữu cơ</li>
+                            </ul>
+                            <h3>Cách nhận biết thực phẩm hữu cơ</h3>
+                            <ul>
+                                <li>Chọn mua ở cửa hàng uy tín, có tem chứng nhận USDA, EU, NASAA...</li>
+                                <li>100% hữu cơ: Sản phẩm làm từ 100% thành phần hữu cơ.</li>
+                                <li>Hữu cơ: Sản phẩm chứa ít nhất 95% thành phần hữu cơ.</li>
+                                <li>Được làm bằng hữu cơ: Ít nhất 70% thành phần là hữu cơ.</li>
+                            </ul>
+                            <p><em>Nguồn: <a href="https://www.cleanipedia.com/vn/gia-dinh/thuc-pham-huu-co.html" target="_blank" rel="noopener">Cleanipedia</a></em></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bài viết 2 -->
+                <div class="rounded-2xl shadow-lg border border-gray-200 bg-white">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-5 focus:outline-none accordion-header" id="blog2">
+                        <span class="text-xl md:text-2xl font-bold text-left">Quy trình sản xuất thực phẩm hữu cơ tại GC Food</span>
+                        <span class="accordion-icon text-2xl transition-transform">&#9660;</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <img src="/assets/img/go-organic-this-summer-ingredients-opengraph.png" alt="GC Food Organic" class="rounded-xl w-full h-64 object-cover mb-6 shadow">
+                        <div class="prose max-w-none">
+                            <h3>GC Food và cam kết hữu cơ</h3>
+                            <p>GC Food là một trong những doanh nghiệp tiên phong tại Việt Nam áp dụng quy trình sản xuất thực phẩm hữu cơ nghiêm ngặt, đảm bảo sản phẩm sạch, an toàn và giữ trọn dinh dưỡng tự nhiên cho người tiêu dùng.</p>
+                            <h3>Các bước trong quy trình sản xuất hữu cơ tại GC Food</h3>
+                            <ul>
+                                <li><strong>Chọn giống và đất trồng:</strong> Sử dụng giống cây trồng không biến đổi gene, đất canh tác không tồn dư hóa chất độc hại.</li>
+                                <li><strong>Chăm sóc hữu cơ:</strong> Không sử dụng phân bón hóa học, thuốc trừ sâu tổng hợp, chỉ dùng phân hữu cơ và biện pháp sinh học.</li>
+                                <li><strong>Thu hoạch và bảo quản:</strong> Thu hoạch đúng thời điểm, bảo quản tự nhiên, không dùng chất bảo quản độc hại.</li>
+                                <li><strong>Chế biến và đóng gói:</strong> Quy trình chế biến khép kín, đảm bảo vệ sinh an toàn thực phẩm, đóng gói thân thiện môi trường.</li>
+                            </ul>
+                            <h3>Lợi ích của thực phẩm hữu cơ GC Food</h3>
+                            <ul>
+                                <li>Giữ trọn dinh dưỡng tự nhiên, không tồn dư hóa chất.</li>
+                                <li>Đảm bảo an toàn cho sức khỏe người tiêu dùng.</li>
+                                <li>Bảo vệ môi trường, phát triển nông nghiệp bền vững.</li>
+                            </ul>
+                            <p><em>Nguồn: <a href="https://vnexpress.net/quy-trinh-san-xuat-thuc-pham-huu-co-tai-gc-food-4820436.html" target="_blank" rel="noopener">VnExpress</a></em></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bài viết 3 -->
+                <div class="rounded-2xl shadow-lg border border-gray-200 bg-white">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-5 focus:outline-none accordion-header" id="blog3">
+                        <span class="text-xl md:text-2xl font-bold text-left">Thực phẩm hữu cơ là gì và có tốt hơn các loại thực phẩm khác không?</span>
+                        <span class="accordion-icon text-2xl transition-transform">&#9660;</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <img src="/assets/img/thuc-pham-huu-co-5.png" alt="Thực phẩm hữu cơ" class="rounded-xl w-full h-64 object-cover mb-6 shadow">
+                        <div class="prose max-w-none">
+                            <h3>Thực phẩm hữu cơ là gì?</h3>
+                            <p>Thực phẩm hữu cơ là sản phẩm được sản xuất theo quy trình tự nhiên, không sử dụng hóa chất độc hại, không biến đổi gene, không dùng hormone tăng trưởng.</p>
+                            <h3>Lợi ích của thực phẩm hữu cơ</h3>
+                            <ul>
+                                <li>Giảm nguy cơ tiếp xúc hóa chất độc hại, tốt cho sức khỏe lâu dài.</li>
+                                <li>Chứa nhiều chất chống oxy hóa, vitamin và khoáng chất hơn.</li>
+                                <li>Hương vị tự nhiên, tươi ngon hơn.</li>
+                                <li>Bảo vệ môi trường, phát triển nông nghiệp bền vững.</li>
+                            </ul>
+                            <h3>Thực phẩm hữu cơ có tốt hơn các loại thực phẩm khác không?</h3>
+                            <p>Nhiều nghiên cứu cho thấy thực phẩm hữu cơ có thể chứa nhiều chất dinh dưỡng hơn, ít tồn dư hóa chất, nhưng giá thành cao hơn. Việc lựa chọn nên dựa vào nhu cầu, điều kiện kinh tế và nguồn cung cấp uy tín.</p>
+                            <h3>Lưu ý khi sử dụng thực phẩm hữu cơ</h3>
+                            <ul>
+                                <li>Chọn mua ở nơi uy tín, có chứng nhận hữu cơ rõ ràng.</li>
+                                <li>Bảo quản đúng cách để giữ trọn dinh dưỡng.</li>
+                            </ul>
+                            <p><em>Nguồn: <a href="https://www.vinmec.com/vie/bai-viet/thuc-pham-huu-co-la-gi-va-co-tot-hon-cac-loai-thuc-pham-khac-khong-vi" target="_blank" rel="noopener">Vinmec</a></em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-yellow-100 text-green-950 pt-20 pb-10 md:pt-28 relative">
+        <div class="footer_icon container mt-16 mb-10">
+            <div class="border-b border-green-500 relative">
+                <div class="absolute top-0 transform -translate-y-1/2 left-0 right-0 max-w-36 mx-auto">
+                    <div class="bg-yellow-100 text-lg text-center space-x-2">
+                        <a href="https://www.facebook.com/profile.php?id=61576912419504" target="_blank" rel="noopener">
+                            <i class="ri-facebook-fill hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                        </a>
+                        <i class="ri-twitter-x-line hover:text-yellow-500 duration-300 cursor-pointer text-base"></i>
+                        <i class="ri-instagram-line hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                        <i class="ri-linkedin-fill hover:text-yellow-500 duration-300 cursor-pointer"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_content container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 text-center md:text-start">
+            <div>
+                <div class="text-7xl text-green-700 text-center inline-block">
+                    <img src="assets/img/avatar.ico" alt="Logo" class="w-20 h-20 mx-auto" />
+                    <p class="font-Lobster text-xl sm:text-2xl">GreenEco Heaven</p>
+                </div>
+            </div>
+            <div>
+                <p class="mb-5 font-bold text-xl">Truy Cập Nhanh</p>
+                <div class="flex flex-col gap-1">
+                    <a href="#">Rau củ</a>
+                    <a href="#">Trái cây</a>
+                    <a href="#">Hạt giống</a>
+                    <a href="#">Giao hàng</a>
+                </div>
+            </div>
+            <div>
+                <p class="mb-5 font-bold text-xl">Các Dịch Vụ Phổ Biến</p>
+                <div class="flex flex-col gap-1">
+                    <a href="#">Tư vấn trồng cây</a>
+                    <a href="#">Chăm sóc vườn</a>
+                    <a href="#">Kiểm soát cỏ dại</a>
+                    <a href="#">Dự án xanh</a>
+                </div>
+            </div>
+            <div>
+                <p class="mb-5 font-bold text-xl">Liên Hệ</p>
+                <div class="flex flex-col gap-1">
+                    <a href="tel:+84813453366">+84 81 3453366</a>
+                    <a href="mailto:greenECoHeaven@gmail.com">greenECoHeaven@gmail.com</a>
+                    <br>
+                    <p>Thạch Thất, Hà Nội, Việt Nam</p>
+                </div>
+            </div>
+        </div>
+        <div class="copy_right container">
+            <p class="text-center mt-10 opacity-50">© 2025 GreenEco Heaven. Đã đăng ký bản quyền.</p>
+        </div>
+        <div class="footer_floral absolute bottom-0 left-0 opacity-20 pointer-events-none"> 
+            <img src="assets/img/floral-1.png" alt="floral_image" class="w-full lg:w-1/2">
+        </div>
+    </footer>
+    <script>
+    // Accordion logic
+    const headers = document.querySelectorAll('.accordion-header');
+    const contents = document.querySelectorAll('.accordion-content');
+    const icons = document.querySelectorAll('.accordion-icon');
+    let openIndex = 0;
+    function openAccordion(idx) {
+        contents.forEach((c, i) => {
+            if (i === idx) {
+                c.classList.add('open');
+                icons[i].style.transform = 'rotate(180deg)';
+            } else {
+                c.classList.remove('open');
+                icons[i].style.transform = 'rotate(0deg)';
+            }
+        });
+    }
+    headers.forEach((header, idx) => {
+        header.addEventListener('click', () => openAccordion(idx));
+    });
+    // Mở bài đầu tiên mặc định
+    openAccordion(0);
+    // Cuộn mượt khi click mục lục
+    document.querySelectorAll('.toc-link').forEach((link, idx) => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openAccordion(idx);
+            document.getElementById('blog'+(idx+1)).scrollIntoView({behavior:'smooth', block:'start'});
+        });
+    });
+    </script>
+</body>
+</html> 

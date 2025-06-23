@@ -40,12 +40,17 @@
 
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4">Quản lý</h1>
-        <h2 class="text-xl font-bold mb-2">Thống kê sản phẩm bán <span id="stats-type-label">theo tháng</span></h2>
+        <h2 class="text-xl font-bold mb-2">Thống kê <span id="stats-metric-label">sản phẩm bán</span> <span id="stats-type-label">theo tháng</span></h2>
         <div class="flex items-center gap-4 mb-2">
             <label for="stats-type" class="font-semibold">Xem theo:</label>
             <select id="stats-type" class="border rounded px-2 py-1">
                 <option value="month">Tháng</option>
                 <option value="day">Ngày</option>
+            </select>
+            <label for="stats-metric" class="font-semibold">Chỉ số:</label>
+            <select id="stats-metric" class="border rounded px-2 py-1">
+                <option value="sold">Sản phẩm bán</option>
+                <option value="revenue">Doanh thu</option>
             </select>
         </div>
         <div class="bg-white p-4 rounded-lg mb-4">
@@ -86,57 +91,96 @@
             await fetchInventory();
             // Sự kiện đổi kiểu thống kê
             document.getElementById('stats-type').addEventListener('change', fetchAndRenderStats);
+            document.getElementById('stats-metric').addEventListener('change', fetchAndRenderStats);
         });
 
         async function fetchAndRenderStats() {
             const token = localStorage.getItem('token');
             const type = document.getElementById('stats-type').value;
-            document.getElementById('stats-type-label').textContent = type === 'day' ? 'theo ngày' : 'theo tháng';
+            const metric = document.getElementById('stats-metric').value;
+            document.getElementById('stats-type-label').textContent = type === 'day' ? (metric === 'revenue' ? 'doanh thu theo ngày' : 'theo ngày') : (metric === 'revenue' ? 'doanh thu theo tháng' : 'theo tháng');
+            document.getElementById('stats-metric-label').textContent = metric === 'revenue' ? 'doanh thu' : 'sản phẩm bán';
             try {
-                const response = await axios.get(`${API_URL}/orders/admin/stats?type=${type}`, {
+                const response = await axios.get(`${API_URL}/orders/admin/stats?type=${type}&metric=${metric}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                renderSalesChart(response.data, type);
+                renderSalesChart(response.data, type, metric);
             } catch (error) {
                 console.error('Lỗi khi lấy thống kê:', error.message);
                 document.getElementById('salesChart').parentElement.innerHTML = '<p>Không thể tải thống kê.</p>';
             }
         }
 
-        function renderSalesChart(data, type = 'month') {
-            // Gom nhóm theo period, mỗi sản phẩm là 1 series
-            const periods = [...new Set(data.map(item => item.period))];
-            const products = [...new Set(data.map(item => item.productName))];
-            const datasets = products.map(product => {
-                return {
-                    label: product,
-                    data: periods.map(period => {
-                        const found = data.find(d => d.period === period && d.productName === product);
-                        return found ? found.totalSold : 0;
-                    }),
-                    backgroundColor: `rgba(${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},0.6)`
-                };
-            });
+        function renderSalesChart(data, type = 'month', metric = 'sold') {
             const ctx = document.getElementById('salesChart').getContext('2d');
             if(window.salesChartInstance) window.salesChartInstance.destroy();
-            window.salesChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: periods,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        title: { display: true, text: `Sản phẩm bán ${type === 'day' ? 'theo ngày' : 'theo tháng'}` }
+
+            if (metric === 'revenue') {
+                // Vẽ doanh thu tổng hợp dạng line chart
+                const periods = data.map(item => item.period);
+                const revenues = data.map(item => item.totalRevenue);
+                window.salesChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: periods,
+                        datasets: [{
+                            label: 'Doanh thu',
+                            data: revenues,
+                            fill: false,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            tension: 0.3,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+                        }]
                     },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Số lượng bán' } },
-                        x: { title: { display: true, text: type === 'day' ? 'Ngày' : 'Tháng' } }
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: `Doanh thu ${type === 'day' ? 'theo ngày' : 'theo tháng'}` }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Doanh thu (₫)' } },
+                            x: { title: { display: true, text: type === 'day' ? 'Ngày' : 'Tháng' } }
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                // Vẽ sản phẩm bán như cũ
+                // Gom nhóm theo period, mỗi sản phẩm là 1 series
+                const periods = [...new Set(data.map(item => item.period))];
+                const products = [...new Set(data.map(item => item.productName))];
+                const datasets = products.map(product => {
+                    return {
+                        label: product,
+                        data: periods.map(period => {
+                            const found = data.find(d => d.period === period && d.productName === product);
+                            if (!found) return 0;
+                            return found.totalSold;
+                        }),
+                        backgroundColor: `rgba(${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},${Math.floor(Math.random()*200)},0.6)`
+                    };
+                });
+                window.salesChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: periods,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: { display: true, text: `Sản phẩm bán ${type === 'day' ? 'theo ngày' : 'theo tháng'}` }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Số lượng bán' } },
+                            x: { title: { display: true, text: type === 'day' ? 'Ngày' : 'Tháng' } }
+                        }
+                    }
+                });
+            }
         }
 
         async function fetchAdminOrders() {

@@ -110,52 +110,93 @@ exports.getInventory = async (req, res) => {
 exports.getStats = async (req, res) => {
   try {
     const type = req.query.type === 'day' ? 'day' : 'month';
+    const metric = req.query.metric || 'sold';
     const dateFormat = type === 'day' ? '%Y-%m-%d' : '%Y-%m';
     const OrderDetail = require('../models/orderDetail.model');
-    const Product = require('../models/product.model');
     const Order = require('../models/order.model');
-    const stats = await OrderDetail.aggregate([
-      {
-        $lookup: {
-          from: 'orders',
-          localField: 'orderId',
-          foreignField: '_id',
-          as: 'order',
+
+    if (metric === 'revenue') {
+      // Tổng doanh thu theo ngày/tháng (không phân theo sản phẩm)
+      const stats = await OrderDetail.aggregate([
+        {
+          $lookup: {
+            from: 'orders',
+            localField: 'orderId',
+            foreignField: '_id',
+            as: 'order',
+          },
         },
-      },
-      { $unwind: '$order' },
-      {
-        $lookup: {
-          from: 'products',
-          localField: 'productId',
-          foreignField: '_id',
-          as: 'product',
+        { $unwind: '$order' },
+        { $match: { 'order.status': 'delivered' } },
+        {
+          $addFields: {
+            period: { $dateToString: { format: dateFormat, date: '$order.createdAt' } },
+            revenue: { $multiply: ['$quantity', '$price'] }
+          },
         },
-      },
-      { $unwind: '$product' },
-      {
-        $addFields: {
-          period: { $dateToString: { format: dateFormat, date: '$order.createdAt' } },
-          productName: '$product.name',
+        {
+          $group: {
+            _id: '$period',
+            totalRevenue: { $sum: '$revenue' }
+          },
         },
-      },
-      {
-        $group: {
-          _id: { period: '$period', productName: '$productName' },
-          totalSold: { $sum: '$quantity' },
+        {
+          $project: {
+            _id: 0,
+            period: '$_id',
+            totalRevenue: 1
+          },
         },
-      },
-      {
-        $project: {
-          _id: 0,
-          period: '$_id.period',
-          productName: '$_id.productName',
-          totalSold: 1,
+        { $sort: { period: 1 } },
+      ]);
+      return res.json(stats);
+    } else {
+      // Thống kê sản phẩm bán như cũ
+      const Product = require('../models/product.model');
+      const stats = await OrderDetail.aggregate([
+        {
+          $lookup: {
+            from: 'orders',
+            localField: 'orderId',
+            foreignField: '_id',
+            as: 'order',
+          },
         },
-      },
-      { $sort: { period: 1, productName: 1 } },
-    ]);
-    res.json(stats);
+        { $unwind: '$order' },
+        { $match: { 'order.status': 'delivered' } },
+        {
+          $lookup: {
+            from: 'products',
+            localField: 'productId',
+            foreignField: '_id',
+            as: 'product',
+          },
+        },
+        { $unwind: '$product' },
+        {
+          $addFields: {
+            period: { $dateToString: { format: dateFormat, date: '$order.createdAt' } },
+            productName: '$product.name',
+          },
+        },
+        {
+          $group: {
+            _id: { period: '$period', productName: '$productName' },
+            totalSold: { $sum: '$quantity' }
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            period: '$_id.period',
+            productName: '$_id.productName',
+            totalSold: 1
+          },
+        },
+        { $sort: { period: 1, productName: 1 } },
+      ]);
+      return res.json(stats);
+    }
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server' });
   }
