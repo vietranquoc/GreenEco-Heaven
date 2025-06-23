@@ -85,6 +85,7 @@
                                 <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
                             `).join('')}
                         </div>
+                        ${order.status === 'shipped' ? `<button onclick="confirmReceived('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Đã nhận được hàng</button>` : ''}
                     </div>
                 `).join('');
             }
@@ -115,6 +116,40 @@
             } catch (error) {
                 console.error('Lỗi khi lấy đơn hàng:', error.message);
                 return [];
+            }
+        }
+
+        // Thêm hàm xác nhận đã nhận hàng
+        async function confirmReceived(orderId) {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+            if (!confirm('Bạn chắc chắn đã nhận được hàng?')) return;
+            try {
+                await axios.put(`${API_URL}/orders/${orderId}`, { status: 'delivered' }, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('Cảm ơn bạn đã xác nhận!');
+                // Reload lại danh sách đơn hàng
+                const orders = await fetchOrders();
+                const ordersList = document.getElementById('orders-list');
+                ordersList.innerHTML = orders.map(order => `
+                    <div class="border-b py-4">
+                        <p><strong>Mã đơn:</strong> ${order._id}</p>
+                        <p><strong>Ngày đặt:</strong> ${new Date(order.createdAt).toLocaleDateString()}</p>
+                        <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
+                        <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
+                        <p><strong>Trạng thái:</strong> ${order.status}</p>
+                        <div class="mt-2">
+                            <strong>Sản phẩm:</strong>
+                            ${order.items.map(item => `
+                                <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
+                            `).join('')}
+                        </div>
+                        ${order.status === 'shipped' ? `<button onclick="confirmReceived('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Đã nhận được hàng</button>` : ''}
+                    </div>
+                `).join('');
+            } catch (error) {
+                alert('Có lỗi khi xác nhận!');
             }
         }
     </script>

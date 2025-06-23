@@ -146,10 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             console.log('Checkout form submitted');
             const formData = new FormData(checkoutForm);
+            const fullName = formData.get('fullName');
+            const email = formData.get('email');
+            const phoneNumber = formData.get('phoneNumber');
+            const address = formData.get('address');
+            const note = formData.get('note');
             const paymentMethod = formData.get('payment');
-            const customerName = formData.get('name');
-            const customerPhone = formData.get('phone');
-            const customerAddress = formData.get('address');
             const token = localStorage.getItem('token');
 
             if (!token) {
@@ -158,39 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const orderItems = cart.map(item => 
-                `${item.name} - ${item.price.toLocaleString()}₫ x ${item.qty} = ${(item.price * item.qty).toLocaleString()}₫`
-            ).join('\n');
-            const totalAmount = cart.reduce((total, item) => total + (item.price * item.qty), 0).toLocaleString() + '₫';
-
-            const formDataToSend = {
-                access_key: "5e211e15-6ae3-4648-8115-5eff57d5b26b",
-                name: customerName,
-                phone: customerPhone,
-                address: customerAddress,
-                payment_method: paymentMethod === 'online' ? 'Thanh toán online' : 'Thanh toán khi nhận hàng',
-                order_items: orderItems,
-                total_amount: totalAmount
-            };
-
             try {
-                console.log('Gửi form Web3Forms:', formDataToSend);
-                const web3Response = await fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", Accept: "application/json" },
-                    body: JSON.stringify(formDataToSend)
-                });
-                const web3Result = await web3Response.json();
-                if (!web3Result.success) {
-                    throw new Error("Web3Forms submission failed: " + JSON.stringify(web3Result));
-                }
-
-                console.log('Gửi API order:', { items: cart, name: customerName, phone: customerPhone, address: customerAddress, paymentMethod });
                 await axios.post(`${API_URL}/orders`, {
-                    items: cart,
-                    name: customerName,
-                    phone: customerPhone,
-                    address: customerAddress,
+                    fullName,
+                    email,
+                    phoneNumber,
+                    address,
+                    note,
                     paymentMethod
                 }, {
                     headers: { Authorization: `Bearer ${token}` }
@@ -317,29 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (token) {
         if (loginLink) loginLink.style.display = 'none';
 
-        // Thêm nút Hồ sơ
-        let profileBtn = document.getElementById('profile-btn');
-        if (!profileBtn) {
-            const navList = document.querySelector('#nav-menu ul');
-            if (navList) {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = '#';
-                a.id = 'profile-btn';
-                a.className = 'nav-link';
-                a.textContent = 'Hồ sơ';
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'profile.html';
-                });
-                li.appendChild(a);
-                navList.appendChild(li);
-                profileBtn = a;
-            }
-        } else {
-            profileBtn.style.display = '';
-        }
-
         // Kiểm tra vai trò admin
         fetch(`${API_URL}/auth/check-role`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -347,6 +300,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.role === 'admin') {
+                // Ẩn nút Hồ sơ nếu là admin
+                let profileBtn = document.getElementById('profile-btn');
+                if (profileBtn) profileBtn.style.display = 'none';
+                // Hiện nút Quản lý
                 let adminLink = document.getElementById('admin-link');
                 if (!adminLink) {
                     const navList = document.querySelector('#nav-menu ul');
@@ -368,6 +325,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     adminLink.style.display = '';
                 }
+            } else {
+                // Nếu không phải admin, hiện nút Hồ sơ
+                let profileBtn = document.getElementById('profile-btn');
+                if (!profileBtn) {
+                    const navList = document.querySelector('#nav-menu ul');
+                    if (navList) {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = '#';
+                        a.id = 'profile-btn';
+                        a.className = 'nav-link';
+                        a.textContent = 'Hồ sơ';
+                        a.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            window.location.href = 'profile.html';
+                        });
+                        li.appendChild(a);
+                        navList.appendChild(li);
+                        profileBtn = a;
+                    }
+                } else {
+                    profileBtn.style.display = '';
+                }
+                // Ẩn nút Quản lý nếu không phải admin
+                let adminLink = document.getElementById('admin-link');
+                if (adminLink) adminLink.style.display = 'none';
             }
         });
     } else {

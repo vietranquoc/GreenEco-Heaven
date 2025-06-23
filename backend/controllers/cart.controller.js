@@ -74,3 +74,16 @@ exports.updateCartItem = async (req, res) => {
     res.status(500).json({ message: 'Lỗi server' });
   }
 };
+
+exports.clearCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ userId: req.user.id });
+    if (!cart) return res.status(404).json({ message: 'Giỏ hàng không tồn tại' });
+    cart.items = [];
+    cart.updatedAt = Date.now();
+    await cart.save();
+    res.json({ message: 'Đã xóa toàn bộ giỏ hàng' });
+  } catch (error) {
+    res.status(500).json({ message: 'Lỗi server' });
+  }
+};

@@ -74,9 +74,11 @@
             <button id="close-checkout" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
             <h2 class="text-lg font-bold mb-4 text-green-900">Thông tin đặt hàng</h2>
             <form id="checkout-form" class="w-full flex flex-col gap-3">
-                <input required type="text" name="name" placeholder="Họ và tên" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
-                <input required type="tel" name="phone" placeholder="Số điện thoại" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="text" name="fullName" placeholder="Họ và tên người nhận" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="email" name="email" placeholder="Email người nhận" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <input required type="tel" name="phoneNumber" placeholder="Số điện thoại" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
                 <input required type="text" name="address" placeholder="Địa chỉ nhận hàng" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400">
+                <textarea name="note" placeholder="Ghi chú cho đơn hàng (tuỳ chọn)" class="border rounded px-3 py-2 text-green-900 bg-white placeholder-gray-400"></textarea>
                 <div class="flex flex-col gap-2 mt-2 text-green-900">
                     <label class="font-bold">Chọn phương thức thanh toán:</label>
                     <label class="flex items-center gap-2">

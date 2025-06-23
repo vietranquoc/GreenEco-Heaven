@@ -6,5 +6,6 @@ const authMiddleware = require('../middlewares/auth.middleware'); // Đường d
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.get('/user', authMiddleware, authController.getCurrentUser); // Thêm route mới
+router.get('/check-role', authMiddleware, authController.checkRole);
 
 module.exports = router;

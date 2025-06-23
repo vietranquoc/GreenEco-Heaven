@@ -42,3 +42,7 @@ exports.getCurrentUser = async (req, res) => {
     res.status(500).json({ message: 'Lỗi server' });
   }
 };
+
+exports.checkRole = (req, res) => {
+  res.json({ role: req.user.role });
+};

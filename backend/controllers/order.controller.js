@@ -4,7 +4,7 @@ const Cart = require('../models/cart.model');
 const Product = require('../models/product.model');
 
 exports.createOrder = async (req, res) => {
-  const { paymentMethod } = req.body; // 'cod' hoặc 'qr'
+  const { paymentMethod, fullName, email, phoneNumber, address, note } = req.body; // Thêm các trường thông tin nhận hàng
   try {
     if (!['cod', 'qr'].includes(paymentMethod)) {
       return res.status(400).json({ message: 'Phương thức thanh toán không hợp lệ' });
@@ -14,7 +14,16 @@ exports.createOrder = async (req, res) => {
     if (!cart || !cart.items.length) return res.status(400).json({ message: 'Giỏ hàng trống' });
 
     const total = cart.items.reduce((sum, item) => sum + item.quantity * item.productId.price, 0);
-    const order = new Order({ userId: req.user.id, total, paymentMethod });
+    const order = new Order({
+      userId: req.user.id,
+      fullName,
+      email,
+      phoneNumber,
+      address,
+      note,
+      total,
+      paymentMethod
+    });
     await order.save();
 
     const orderDetail = cart.items.map(item => ({
@@ -65,9 +74,24 @@ exports.getOrders = async (req, res) => {
 exports.updateOrderStatus = async (req, res) => {
   const { status } = req.body;
   try {
-    const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ message: 'Đơn hàng không tồn tại' });
-    res.json(order);
+
+    // Nếu là admin, cho phép cập nhật mọi trạng thái
+    if (req.user.role === 'admin') {
+      order.status = status;
+      await order.save();
+      return res.json(order);
+    }
+
+    // Nếu là user thường, chỉ cho phép cập nhật sang delivered
+    if (order.userId && order.userId.equals && order.userId.equals(req.user.id) && status === 'delivered' && order.status === 'shipped') {
+      order.status = 'delivered';
+      await order.save();
+      return res.json(order);
+    }
+
+    return res.status(403).json({ message: 'Bạn không có quyền cập nhật trạng thái này.' });
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server' });
   }
@@ -82,15 +106,14 @@ exports.getInventory = async (req, res) => {
   }
 };
 
-// Thống kê sản phẩm bán theo tháng
-exports.getStatsByMonth = async (req, res) => {
+// Thống kê sản phẩm bán theo ngày hoặc tháng
+exports.getStats = async (req, res) => {
   try {
-    // Lấy tất cả order detail, join với product và order
+    const type = req.query.type === 'day' ? 'day' : 'month';
+    const dateFormat = type === 'day' ? '%Y-%m-%d' : '%Y-%m';
     const OrderDetail = require('../models/orderDetail.model');
     const Product = require('../models/product.model');
     const Order = require('../models/order.model');
-
-    // Lấy order detail, join order để lấy tháng, join product để lấy tên
     const stats = await OrderDetail.aggregate([
       {
         $lookup: {
@@ -112,25 +135,25 @@ exports.getStatsByMonth = async (req, res) => {
       { $unwind: '$product' },
       {
         $addFields: {
-          month: { $dateToString: { format: '%Y-%m', date: '$order.createdAt' } },
+          period: { $dateToString: { format: dateFormat, date: '$order.createdAt' } },
           productName: '$product.name',
         },
       },
       {
         $group: {
-          _id: { month: '$month', productName: '$productName' },
+          _id: { period: '$period', productName: '$productName' },
           totalSold: { $sum: '$quantity' },
         },
       },
       {
         $project: {
           _id: 0,
-          month: '$_id.month',
+          period: '$_id.period',
           productName: '$_id.productName',
           totalSold: 1,
         },
       },
-      { $sort: { month: 1, productName: 1 } },
+      { $sort: { period: 1, productName: 1 } },
     ]);
     res.json(stats);
   } catch (error) {
