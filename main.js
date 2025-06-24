@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (checkoutModal) checkoutModal.classList.add('hidden');
-                if (paymentMethod === 'online' && qrModal) {
+                if (paymentMethod === 'qr' && qrModal) {
                     qrModal.classList.remove('hidden');
                 } else if (thankyouModal) {
                     thankyouModal.classList.remove('hidden');
@@ -383,25 +383,33 @@ async function fetchPopularProducts() {
             const imageUrl = product.image ? `${BASE_URL}${product.image}` : 'assets/img/default-product.png';
             console.log(`Render sản phẩm: ${product.name}, ảnh: ${imageUrl}`);
             return `
-                <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative hover:shadow-2xl hover:-translate-y-1 duration-300">
-                    <img src="${imageUrl}" alt="${product.name}" loading="lazy"
-                        onerror="this.src='assets/img/default-product.png'"
-                        class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
-                    <p class="italic text-slate-200">${product.description || 'Sản phẩm hữu cơ chất lượng cao, an toàn cho sức khỏe.'}</p>
-                    <h3 class="text-xl font-bold text-yellow-500">${product.name}</h3>
-                    <div class="text-yellow-500 text-xs py-3">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-half-fill"></i>
-                        <i class="ri-star-line text-gray-400"></i>
+                <div class="popular_card bg-green-950 p-10 pt-24 rounded-md relative hover:shadow-2xl hover:-translate-y-1 duration-300 flex flex-col justify-between gap-5">
+                    <div>
+                        <img src="${imageUrl}" alt="${product.name}" loading="lazy"
+                            onerror="this.src='assets/img/default-product.png'"
+                            class="w-56 absolute -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
+                        <p class="italic text-slate-200 h-80 overflow-hidden">
+                            ${product.description && product.description.length > 200
+                                ? product.description.substring(0, 200) + '...' 
+                                : product.description || 'Sản phẩm hữu cơ chất lượng cao, an toàn cho sức khỏe.'}
+                        </p>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <p class="text-xl text-yellow-400">${Number(product.price || 0).toLocaleString()}₫</p>
-                        <button onclick="addToCartAPI('${product._id}', '${product.name.replace(/'/g, "\\'")}', ${product.price})" 
-                                class="bg-yellow-500 px-2 py-1 rounded-sm text-xl hover:bg-yellow-600 duration-300">
-                            <i class="ri-shopping-cart-fill"></i>
-                        </button>
+                    <h3 class="text-xl font-bold text-yellow-500">${product.name}</h3>
+                    <div>
+                        <div class="text-yellow-500 text-xs py-3">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line text-gray-400"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xl text-yellow-400">${Number(product.price || 0).toLocaleString()}₫</p>
+                            <button onclick="addToCartAPI('${product._id}', '${product.name.replace(/'/g, "\\'")}', ${product.price})" 
+                                    class="bg-yellow-500 px-2 py-1 rounded-sm text-xl hover:bg-yellow-600 duration-300">
+                                <i class="ri-shopping-cart-fill"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -468,7 +476,7 @@ async function fetchAllProducts(page = 1, limit = 8) {
                         <p class="text-lg text-yellow-400 font-bold">${Number(product.price || 0).toLocaleString()}₫</p>
                         <button onclick="addToCartAPI('${product._id}', '${product.name.replace(/'/g, "\\'")}', ${product.price})" 
                                 class="bg-yellow-500 px-4 py-2 rounded text-green-950 font-bold hover:bg-yellow-600 duration-300">
-                            <i class="ri-shopping-cart-fill"></i> Thêm vào giỏ
+                            <i class="ri-shopping-cart-fill"></i>
                         </button>
                     </div>
                 </div>

@@ -840,8 +840,16 @@ video {
   height: 5rem;
 }
 
+.h-32 {
+  height: 8rem;
+}
+
 .h-64{
   height: 16rem;
+}
+
+.h-80{
+  height: 20rem;
 }
 
 .h-full{
@@ -1036,6 +1044,10 @@ video {
 
 .gap-y-36{
   row-gap: 9rem;
+}
+
+.gap-y-16{
+  row-gap: 4rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
@@ -1716,6 +1728,10 @@ h3{
 
   .md\:mb-28{
     margin-bottom: 7rem;
+  }
+
+  .md\:mb-8{
+    margin-bottom: 2rem;
   }
 
   .md\:block{
