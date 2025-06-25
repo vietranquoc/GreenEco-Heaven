@@ -58,8 +58,10 @@
         </div>
         <h2 class="text-xl font-bold mb-2">Danh sách đơn hàng</h2>
         <div id="orders-admin" class="bg-white p-4 rounded-lg mb-4"></div>
+        <div id="orders-admin-pagination" class="flex justify-center mt-4 space-x-2"></div>
         <h2 class="text-xl font-bold mb-2">Sản phẩm tồn kho</h2>
         <div id="inventory" class="bg-white p-4 rounded-lg"></div>
+        <div id="inventory-pagination" class="flex justify-center mt-4 space-x-2"></div>
     </div>
 
     <script>
@@ -186,35 +188,66 @@
         async function fetchAdminOrders() {
             const token = localStorage.getItem('token');
             const ordersAdmin = document.getElementById('orders-admin');
+            const ORDERS_PER_PAGE = 2;
+            let currentPage = window.adminOrdersCurrentPage || 1;
             try {
                 const response = await axios.get(`${API_URL}/orders`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                ordersAdmin.innerHTML = response.data.map(order => `
-                    <div class="border-b py-4">
-                        <p><strong>Mã đơn:</strong> ${order._id}</p>
-                        <p><strong>Người đặt:</strong> ${order.userId.name}</p>
-                        <p><strong>Họ tên nhận:</strong> ${order.fullName || ''}</p>
-                        <p><strong>Email nhận:</strong> ${order.email || ''}</p>
-                        <p><strong>Số điện thoại:</strong> ${order.phoneNumber || ''}</p>
-                        <p><strong>Địa chỉ:</strong> ${order.address || ''}</p>
-                        <p><strong>Ghi chú:</strong> ${order.note || ''}</p>
-                        <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
-                        <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
-                        <p><strong>Trạng thái:</strong> <span class="status-badge ${order.status}">${order.status}</span></p>
-                        <div class="mt-2">
-                            <strong>Sản phẩm:</strong>
-                            ${order.items.map(item => `
-                                <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
-                            `).join('')}
-                        </div>
-                        ${order.status === 'pending' ? `
-                        <button onclick="showConfirmOrderPopup('${order._id}', 'processing')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Xác nhận</button>
-                        ` : order.status === 'processing' ? `
-                        <button onclick="showConfirmOrderPopup('${order._id}', 'shipped')" class="mt-2 px-3 py-1 bg-blue-600 text-white rounded">Gửi hàng</button>
-                        ` : ''}
-                    </div>
-                `).join('');
+                let orders = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                function renderOrdersPage(page) {
+                    const start = (page - 1) * ORDERS_PER_PAGE;
+                    const end = start + ORDERS_PER_PAGE;
+                    const paginatedOrders = orders.slice(start, end);
+                    if (paginatedOrders.length === 0) {
+                        ordersAdmin.innerHTML = '<p>Không có đơn hàng nào.</p>';
+                    } else {
+                        ordersAdmin.innerHTML = paginatedOrders.map(order => `
+                            <div class="border-b py-4">
+                                <p><strong>Mã đơn:</strong> ${order._id}</p>
+                                <p><strong>Người đặt:</strong> ${order.userId.name}</p>
+                                <p><strong>Họ tên nhận:</strong> ${order.fullName || ''}</p>
+                                <p><strong>Email nhận:</strong> ${order.email || ''}</p>
+                                <p><strong>Số điện thoại:</strong> ${order.phoneNumber || ''}</p>
+                                <p><strong>Địa chỉ:</strong> ${order.address || ''}</p>
+                                <p><strong>Ghi chú:</strong> ${order.note || ''}</p>
+                                <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
+                                <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
+                                <p><strong>Trạng thái:</strong> <span class="status-badge ${order.status}">${order.status}</span></p>
+                                <div class="mt-2">
+                                    <strong>Sản phẩm:</strong>
+                                    ${order.items.map(item => `
+                                        <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
+                                    `).join('')}
+                                </div>
+                                ${order.status === 'pending' ? `
+                                <button onclick="showConfirmOrderPopup('${order._id}', 'processing')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Xác nhận</button>
+                                ` : order.status === 'processing' ? `
+                                <button onclick="showConfirmOrderPopup('${order._id}', 'shipped')" class="mt-2 px-3 py-1 bg-blue-600 text-white rounded">Gửi hàng</button>
+                                ` : ''}
+                            </div>
+                        `).join('');
+                    }
+                    renderOrdersPagination(page);
+                }
+                function renderOrdersPagination(page) {
+                    const totalPages = Math.ceil(orders.length / ORDERS_PER_PAGE);
+                    const pagination = document.getElementById('orders-admin-pagination');
+                    if (totalPages <= 1) {
+                        pagination.innerHTML = '';
+                        return;
+                    }
+                    let html = '';
+                    for (let i = 1; i <= totalPages; i++) {
+                        html += `<button class="px-3 py-1 rounded ${i === page ? 'bg-green-700 text-white' : 'bg-green-100 text-green-700 hover:bg-green-200'}" onclick="goToAdminOrdersPage(${i})">${i}</button>`;
+                    }
+                    pagination.innerHTML = html;
+                }
+                window.goToAdminOrdersPage = function(page) {
+                    window.adminOrdersCurrentPage = page;
+                    renderOrdersPage(page);
+                };
+                renderOrdersPage(currentPage);
             } catch (error) {
                 console.error('Lỗi khi lấy danh sách đơn hàng:', error.message);
                 ordersAdmin.innerHTML = '<p>Không thể tải danh sách đơn hàng.</p>';
@@ -246,17 +279,48 @@
         async function fetchInventory() {
             const token = localStorage.getItem('token');
             const inventory = document.getElementById('inventory');
+            const INVENTORY_PER_PAGE = 8;
+            let currentPage = window.inventoryCurrentPage || 1;
             try {
                 const response = await axios.get(`${API_URL}/orders/admin/inventory`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                inventory.innerHTML = response.data.map((item, idx) => `
-                    <div class="border-b py-2">
-                        <p><strong>STT:</strong> ${idx + 1}</p>
-                        <p><strong>Tên:</strong> ${item.name}</p>
-                        <p><strong>Số lượng tồn:</strong> ${item.stock}</p>
-                    </div>
-                `).join('');
+                let items = response.data;
+                function renderInventoryPage(page) {
+                    const start = (page - 1) * INVENTORY_PER_PAGE;
+                    const end = start + INVENTORY_PER_PAGE;
+                    const paginatedItems = items.slice(start, end);
+                    if (paginatedItems.length === 0) {
+                        inventory.innerHTML = '<p>Không có sản phẩm tồn kho.</p>';
+                    } else {
+                        inventory.innerHTML = paginatedItems.map((item, idx) => `
+                            <div class="border-b py-2">
+                                <p><strong>STT:</strong> ${(start + idx + 1)}</p>
+                                <p><strong>Tên:</strong> ${item.name}</p>
+                                <p><strong>Số lượng tồn:</strong> ${item.stock}</p>
+                            </div>
+                        `).join('');
+                    }
+                    renderInventoryPagination(page);
+                }
+                function renderInventoryPagination(page) {
+                    const totalPages = Math.ceil(items.length / INVENTORY_PER_PAGE);
+                    const pagination = document.getElementById('inventory-pagination');
+                    if (totalPages <= 1) {
+                        pagination.innerHTML = '';
+                        return;
+                    }
+                    let html = '';
+                    for (let i = 1; i <= totalPages; i++) {
+                        html += `<button class="px-3 py-1 rounded ${i === page ? 'bg-green-700 text-white' : 'bg-green-100 text-green-700 hover:bg-green-200'}" onclick="goToInventoryPage(${i})">${i}</button>`;
+                    }
+                    pagination.innerHTML = html;
+                }
+                window.goToInventoryPage = function(page) {
+                    window.inventoryCurrentPage = page;
+                    renderInventoryPage(page);
+                };
+                renderInventoryPage(currentPage);
             } catch (error) {
                 console.error('Lỗi khi lấy tồn kho:', error.message);
                 inventory.innerHTML = '<p>Không thể tải tồn kho.</p>';

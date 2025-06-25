@@ -105,12 +105,19 @@ document.addEventListener('DOMContentLoaded', () => {
     sr.reveal(`.about_item_2_content, .about_item_1_img`, { origin: "left" });
     sr.reveal(`.reveiw_leaf, .footer_floral`, { delay: 100, origin: "left" });
 
+    // Loại trừ ScrollReveal cho các modal
+    ScrollReveal().reveal('.no-scrollreveal', { reset: false, opacity: 1, scale: 1, duration: 0, distance: '0px', beforeReveal: el => { el.style.opacity = 1; el.style.transform = 'none'; } });
+
     // Cart Logic
     if (cartBtn && cartModal) {
         cartBtn.addEventListener('click', e => {
             e.preventDefault();
             console.log('Cart button clicked');
             cartModal.classList.remove('hidden');
+            document.body.appendChild(cartModal); // Đảm bảo modal là phần tử cuối cùng trong body
+            cartModal.style.display = 'flex';
+            cartModal.offsetHeight; // ép browser reflow để modal hiện đúng
+            cartModal.style.display = '';
             updateCart(); // Cập nhật giỏ hàng khi mở modal
         });
     }

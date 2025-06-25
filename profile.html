@@ -18,6 +18,10 @@
             <div id="nav-menu" class="hidden md:flex space-x-4">
                 <!-- Menu sẽ được thêm động từ main.js nếu có -->
             </div>
+            <!-- Thêm nút Đăng xuất -->
+            <div class="mt-6 text-right">
+                <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Đăng xuất</button>
+            </div>
             <button id="hamburger" class="md:hidden text-2xl">☰</button>
         </div>
     </nav>
@@ -27,10 +31,7 @@
         <div id="user-info" class="bg-white p-4 rounded-lg mb-4"></div>
         <h2 class="text-xl font-bold mb-2">Đơn hàng của bạn</h2>
         <div id="orders-list" class="bg-white p-4 rounded-lg"></div>
-        <!-- Thêm nút Đăng xuất -->
-        <div class="mt-6 text-right">
-            <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Đăng xuất</button>
-        </div>
+        <div id="orders-pagination" class="flex justify-center mt-4 space-x-2"></div>
     </div>
 
     <script>
@@ -68,27 +69,64 @@
             }
 
             // Lấy danh sách đơn hàng
-            const orders = await fetchOrders();
-            if (orders.length === 0) {
-                ordersList.innerHTML = '<p>Bạn chưa có đơn hàng nào.</p>';
-            } else {
-                ordersList.innerHTML = orders.map(order => `
-                    <div class="border-b py-4">
-                        <p><strong>Mã đơn:</strong> ${order._id}</p>
-                        <p><strong>Ngày đặt:</strong> ${new Date(order.createdAt).toLocaleDateString()}</p>
-                        <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
-                        <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
-                        <p><strong>Trạng thái:</strong> ${order.status}</p>
-                        <div class="mt-2">
-                            <strong>Sản phẩm:</strong>
-                            ${order.items.map(item => `
-                                <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
-                            `).join('')}
+            let orders = await fetchOrders();
+            // Sắp xếp đơn hàng mới nhất lên trên
+            orders = orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            let currentPage = 1;
+            const ORDERS_PER_PAGE = 3;
+            function renderOrdersPage(page) {
+                const start = (page - 1) * ORDERS_PER_PAGE;
+                const end = start + ORDERS_PER_PAGE;
+                const paginatedOrders = orders.slice(start, end);
+                if (paginatedOrders.length === 0) {
+                    ordersList.innerHTML = '<p>Bạn chưa có đơn hàng nào.</p>';
+                } else {
+                    ordersList.innerHTML = paginatedOrders.map(order => `
+                        <div class="border-b py-4">
+                            <p><strong>Mã đơn:</strong> ${order._id}</p>
+                            <p><strong>Ngày đặt:</strong> ${new Date(order.createdAt).toLocaleDateString()}</p>
+                            <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
+                            <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
+                            <p><strong>Trạng thái:</strong> <span class="px-2 py-1 rounded text-white ${getStatusColor(order.status)}">${order.status}</span></p>
+                            <div class="mt-2">
+                                <strong>Sản phẩm:</strong>
+                                ${order.items.map(item => `
+                                    <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
+                                `).join('')}
+                            </div>
+                            ${order.status === 'shipped' ? `<button onclick="confirmReceived('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Đã nhận được hàng</button>` : ''}
                         </div>
-                        ${order.status === 'shipped' ? `<button onclick="confirmReceived('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Đã nhận được hàng</button>` : ''}
-                    </div>
-                `).join('');
+                    `).join('');
+                }
+                renderOrdersPagination(page);
             }
+            function renderOrdersPagination(page) {
+                const totalPages = Math.ceil(orders.length / ORDERS_PER_PAGE);
+                const pagination = document.getElementById('orders-pagination');
+                if (totalPages <= 1) {
+                    pagination.innerHTML = '';
+                    return;
+                }
+                let html = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    html += `<button class="px-3 py-1 rounded ${i === page ? 'bg-green-700 text-white' : 'bg-green-100 text-green-700 hover:bg-green-200'}" onclick="goToOrdersPage(${i})">${i}</button>`;
+                }
+                pagination.innerHTML = html;
+            }
+            window.goToOrdersPage = function(page) {
+                currentPage = page;
+                renderOrdersPage(page);
+            };
+            function getStatusColor(status) {
+                switch (status) {
+                    case 'pending': return 'bg-yellow-500';
+                    case 'shipped': return 'bg-blue-500';
+                    case 'delivered': return 'bg-green-600';
+                    case 'cancelled': return 'bg-red-500';
+                    default: return 'bg-gray-400';
+                }
+            }
+            renderOrdersPage(currentPage);
 
             // Thêm sự kiện cho nút Đăng xuất
             const logoutBtn = document.getElementById('logout-btn');
@@ -130,24 +168,11 @@
                 });
                 alert('Cảm ơn bạn đã xác nhận!');
                 // Reload lại danh sách đơn hàng
-                const orders = await fetchOrders();
-                const ordersList = document.getElementById('orders-list');
-                ordersList.innerHTML = orders.map(order => `
-                    <div class="border-b py-4">
-                        <p><strong>Mã đơn:</strong> ${order._id}</p>
-                        <p><strong>Ngày đặt:</strong> ${new Date(order.createdAt).toLocaleDateString()}</p>
-                        <p><strong>Tổng:</strong> ${order.total.toLocaleString()}₫</p>
-                        <p><strong>Phương thức thanh toán:</strong> ${order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thanh toán online'}</p>
-                        <p><strong>Trạng thái:</strong> ${order.status}</p>
-                        <div class="mt-2">
-                            <strong>Sản phẩm:</strong>
-                            ${order.items.map(item => `
-                                <p>- ${item.productId.name}: ${item.quantity} x ${item.price.toLocaleString()}₫ = ${(item.quantity * item.price).toLocaleString()}₫</p>
-                            `).join('')}
-                        </div>
-                        ${order.status === 'shipped' ? `<button onclick="confirmReceived('${order._id}')" class="mt-2 px-3 py-1 bg-green-600 text-white rounded">Đã nhận được hàng</button>` : ''}
-                    </div>
-                `).join('');
+                let orders = await fetchOrders();
+                // Sắp xếp đơn hàng mới nhất lên trên
+                orders = orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                // Giữ nguyên trang hiện tại nếu có thể
+                renderOrdersPage(currentPage);
             } catch (error) {
                 alert('Có lỗi khi xác nhận!');
             }

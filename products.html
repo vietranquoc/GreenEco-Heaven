@@ -55,7 +55,7 @@
     </main>
 
     <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-        <div class="bg-green-900 text-white rounded-lg p-6 w-full max-w-md relative">
+        <div class="bg-green-900 text-white rounded-lg p-6 w-full max-w-md relative no-scrollreveal">
             <button id="close-cart" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
             <h2 class="text-xl font-bold mb-4">Giỏ hàng</h2>
             <div id="cart-items" class="space-y-3"></div>
@@ -70,7 +70,7 @@
     </div>
 
     <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-6 w-full max-w-md relative flex flex-col items-center">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md relative flex flex-col items-center no-scrollreveal">
             <button id="close-checkout" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
             <h2 class="text-lg font-bold mb-4 text-green-900">Thông tin đặt hàng</h2>
             <form id="checkout-form" class="w-full flex flex-col gap-3">
@@ -96,7 +96,7 @@
     </div>
 
     <div id="thankyou-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-6 w-full max-w-xs relative flex flex-col items-center">
+        <div class="bg-white rounded-lg p-6 w-full max-w-xs relative flex flex-col items-center no-scrollreveal">
             <button id="close-thankyou" class="absolute top-2 right-2 text-xl bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
             <h2 class="text-lg font-bold mb-4 text-green-900">Cảm ơn bạn đã đặt hàng!</h2>
             <p class="text-center text-green-900">Chúng tôi sẽ liên hệ và giao hàng sớm nhất.</p>
@@ -104,7 +104,7 @@
     </div>
 
     <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-8 w-full max-w-md relative flex flex-col items-center">
+        <div class="bg-white rounded-lg p-8 w-full max-w-md relative flex flex-col items-center no-scrollreveal">
             <button id="close-qr" class="absolute top-2 right-2 text-2xl bg-yellow-500 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-400 hover:text-white transition">×</button>
             <h2 class="text-xl font-bold mb-6 text-green-900">Quét mã QR để thanh toán</h2>
             <img src="assets/img/QR-code.png" alt="QR code thanh toán" class="w-64 h-64 object-contain mb-4">
