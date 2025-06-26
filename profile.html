@@ -36,7 +36,7 @@
 
     <script>
         // Định nghĩa API_URL cục bộ
-        const API_URL = 'http://localhost:5000/api'; // Thay bằng URL API thực tế của bạn
+        const API_URL = 'http://localhost:5000/api'; 
 
         document.addEventListener('DOMContentLoaded', async () => {
             const token = localStorage.getItem('token');
@@ -141,6 +141,34 @@
             } else {
                 console.error('Không tìm thấy nút Đăng xuất với ID "logout-btn"');
             }
+
+            // Định nghĩa confirmReceived bên trong để dùng được renderOrdersPage
+            window.confirmReceived = async function(orderId) {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+                if (!confirm('Bạn chắc chắn đã nhận được hàng?')) return;
+                try {
+                    await axios.put(`${API_URL}/orders/${orderId}`, { status: 'delivered' }, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    alert('Cảm ơn bạn đã xác nhận!');
+                    // Cập nhật lại biến orders toàn cục để renderOrdersPage dùng dữ liệu mới
+                    orders = await fetchOrders();
+                    orders = orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    renderOrdersPage(currentPage);
+                } catch (error) {
+                    if (error.response) {
+                        alert('Có lỗi khi xác nhận! ' + (error.response.data.message || error.response.status));
+                        console.error('Lỗi chi tiết:', error.response);
+                    } else if (error.request) {
+                        alert('Không nhận được phản hồi từ server!');
+                        console.error('Lỗi request:', error.request);
+                    } else {
+                        alert('Lỗi không xác định: ' + error.message);
+                        console.error('Lỗi không xác định:', error.message);
+                    }
+                }
+            }
         });
 
         async function fetchOrders() {
@@ -154,27 +182,6 @@
             } catch (error) {
                 console.error('Lỗi khi lấy đơn hàng:', error.message);
                 return [];
-            }
-        }
-
-        // Thêm hàm xác nhận đã nhận hàng
-        async function confirmReceived(orderId) {
-            const token = localStorage.getItem('token');
-            if (!token) return;
-            if (!confirm('Bạn chắc chắn đã nhận được hàng?')) return;
-            try {
-                await axios.put(`${API_URL}/orders/${orderId}`, { status: 'delivered' }, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                alert('Cảm ơn bạn đã xác nhận!');
-                // Reload lại danh sách đơn hàng
-                let orders = await fetchOrders();
-                // Sắp xếp đơn hàng mới nhất lên trên
-                orders = orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                // Giữ nguyên trang hiện tại nếu có thể
-                renderOrdersPage(currentPage);
-            } catch (error) {
-                alert('Có lỗi khi xác nhận!');
             }
         }
     </script>
